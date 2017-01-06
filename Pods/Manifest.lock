@@ -1,0 +1,18 @@
+PODS:
+  - Alamofire (4.2.0)
+  - NibDesignable (3.0.0)
+  - SwiftyJSON (3.1.3)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.2)
+  - NibDesignable (~> 3.0)
+  - SwiftyJSON (~> 3.1)
+
+SPEC CHECKSUMS:
+  Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
+  NibDesignable: 6ccf1e54135cb05be0a78f803b9a8d78125a7d6d
+  SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
+
+PODFILE CHECKSUM: 1363da7775bd3fdc3659c0d79ddb18a32f7acbcb
+
+COCOAPODS: 1.0.1

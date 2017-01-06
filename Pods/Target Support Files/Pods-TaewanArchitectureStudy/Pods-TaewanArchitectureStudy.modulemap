@@ -1,0 +1,6 @@
+framework module Pods_TaewanArchitectureStudy {
+  umbrella header "Pods-TaewanArchitectureStudy-umbrella.h"
+
+  export *
+  module * { export * }
+}
