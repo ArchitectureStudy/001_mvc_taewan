@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class ViewController: UIViewController {
 
@@ -17,9 +18,18 @@ class ViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+//        Router.Repository.issues(user: "", repo: "").rx.list()
+        
+        Model.Issue
+            .rx.list(user: "", repo: "asd")
+            .subscribe(onNext: { issues in
+         
+        })
+
     }
 
 
 }
+
 
