@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RepositoryIssueCell" customModule="TaewanArchitectureStudy" customModuleProvider="target">
+            <connections>
+                <outlet property="stateButton" destination="qRj-Ja-Bbr" id="ZLs-fS-4rq"/>
+                <outlet property="subLabel" destination="brz-tz-G92" id="CQf-ZG-UZK"/>
+                <outlet property="titleLabel" destination="Kcg-KB-Nly" id="ySR-EQ-zpa"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="4u9-E1-nJG">
+            <rect key="frame" x="0.0" y="0.0" width="391" height="71"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QuZ-6g-wtQ" userLabel="bottom line">
+                    <rect key="frame" x="48" y="70" width="343" height="1"/>
+                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="B70-Fq-qQn"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qRj-Ja-Bbr">
+                    <rect key="frame" x="16" y="16" width="28" height="28"/>
+                    <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <state key="normal" image="ic_issues_open"/>
+                    <state key="selected" image="ic_issues_closed"/>
+                </button>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="4OX-Cu-cZI">
+                    <rect key="frame" x="52" y="8" width="323" height="55"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kcg-KB-Nly">
+                            <rect key="frame" x="0.0" y="0.0" width="323" height="21.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="brz-tz-G92">
+                            <rect key="frame" x="0.0" y="25.5" width="323" height="29.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="QuZ-6g-wtQ" firstAttribute="leading" secondItem="4u9-E1-nJG" secondAttribute="leading" constant="48" id="3bX-1g-LQ7"/>
+                <constraint firstAttribute="trailing" secondItem="4OX-Cu-cZI" secondAttribute="trailing" constant="16" id="80g-pj-UKo"/>
+                <constraint firstItem="4OX-Cu-cZI" firstAttribute="leading" secondItem="qRj-Ja-Bbr" secondAttribute="trailing" constant="8" id="IEv-TQ-MnH"/>
+                <constraint firstAttribute="bottom" secondItem="4OX-Cu-cZI" secondAttribute="bottom" constant="8" id="LFY-oZ-RXZ"/>
+                <constraint firstItem="qRj-Ja-Bbr" firstAttribute="leading" secondItem="4u9-E1-nJG" secondAttribute="leading" constant="16" id="PnE-UW-YeY"/>
+                <constraint firstAttribute="bottom" secondItem="QuZ-6g-wtQ" secondAttribute="bottom" id="Uk2-cQ-0dG"/>
+                <constraint firstItem="4OX-Cu-cZI" firstAttribute="top" secondItem="4u9-E1-nJG" secondAttribute="top" constant="8" id="bZO-8g-MDL"/>
+                <constraint firstAttribute="trailing" secondItem="QuZ-6g-wtQ" secondAttribute="trailing" id="ccK-wb-WOe"/>
+                <constraint firstItem="qRj-Ja-Bbr" firstAttribute="top" secondItem="Kcg-KB-Nly" secondAttribute="top" constant="8" id="hG3-6L-VT3"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="33.5" y="-209.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ic_issues_closed" width="28" height="28"/>
+        <image name="ic_issues_open" width="28" height="28"/>
+    </resources>
+</document>
