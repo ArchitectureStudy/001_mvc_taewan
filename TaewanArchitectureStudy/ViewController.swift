@@ -22,7 +22,7 @@ class ViewController: UIViewController {
 //        Router.Repository.issues(user: "", repo: "").rx.list()
         
         Model.Issue
-            .rx.list(user: "", repo: "asd")
+            .rx.list(user: "asdas", repo: "asd")
             .subscribe(onNext: { issues in
          
         })

@@ -15,7 +15,11 @@ extension Router.Repository: ReactiveCompatible { }
 extension Model.Issue: ReactiveCompatible, RequestRepository { }
 
 extension Reactive where Base: RequestRepository {
-    static func list(user: String, repo: String) -> Observable<[Model.Issue]>{
-        return Router.Repository.issues(user: user, repo: repo).rx.requestCollection()
+    static func list(user: String, repo: String, page: Int? = nil) -> Observable<[Model.Issue]>{
+        return Router.Repository.issues(user: user, repo: repo, page: page).rx.requestCollection()
+    }
+    
+    static func show(user: String, repo: String, number: Int) -> Observable<Model.Issue> {
+        return Router.Repository.issue(user: user, repo: repo, number: number).rx.requestObject()
     }
 }

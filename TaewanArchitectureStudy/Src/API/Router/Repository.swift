@@ -14,9 +14,10 @@ public protocol RequestRepository { }
 extension Router {
     public enum Repository: RouterRequestConvertible, RequestRepository {
         case issues(user: String, repo: String, page: Int?)
-//        case issue(user: String, repo: String, id: String)
+        case issue(user: String, repo: String, number: Int)
     }
 }
+
 
 extension Router.Repository {
     var rawString: String {  return "repos" }
@@ -36,6 +37,8 @@ extension Router.Repository {
                 parameters["page"] = page
             }
             return (path: "\(user)/\(repo)/issues", parameters: parameters)
+        case .issue(let user, let repo, let number):
+            return (path: "\(user)/\(repo)/issues/\(number)", parameters: nil)
         }
     }
 }
