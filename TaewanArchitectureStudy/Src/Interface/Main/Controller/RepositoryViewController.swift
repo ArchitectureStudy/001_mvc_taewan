@@ -73,10 +73,11 @@ extension RepositoryViewController: UICollectionViewDataSource {
         if let issueCell = cell as? RepositoryIssueCell {
             issueCell.state = model.state
             issueCell.title = model.title
-            issueCell.sub = "#\(model.number) \(model.state.display) on \(model.createdAt?.description ?? "--") by \(model.user.login)"
+            issueCell.sub = "#\(model.number) \(model.state.display) on \(model.createdAt?.string(dateFormat: "d MMM yyyy") ?? "--") by \(model.user.login)"
             //MMM
 //            print(model.createdAt)
             //#54 opened on 8 Feb 2014 by Wavesonics
+            // dd MMM yyyy
         }
         
         return cell
@@ -101,7 +102,7 @@ extension RepositoryViewController: UICollectionViewDelegateFlowLayout {
         
         
         estimateCell.title = model.title
-        estimateCell.sub = "#\(model.number) \(model.state.display) on \(model.createdAt?.description ?? "--") by \(model.user.login)"//여기서 중복이 일어나네..
+        estimateCell.sub = "#\(model.number) \(model.state.display) on \(model.createdAt?.string(dateFormat: "d MMM yyyy") ?? "--") by \(model.user.login)"//여기서 중복이 일어나네..
         
         estimatedSize = estimateCell.contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: UILayoutPriorityRequired, verticalFittingPriority: UILayoutPriorityDefaultLow)
         estimatedSizes[indexPath] = estimatedSize

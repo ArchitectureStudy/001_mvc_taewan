@@ -29,10 +29,3 @@ extension Model {
         }
     }
 }
-
-
-extension Model.User {
-    var isFakeModel: Bool {
-        return id == 0
-    }
-}

@@ -72,6 +72,15 @@ extension Model.Issue {
 }
 
 
+extension Date {
+    func string(dateFormat: String) -> String {
+        let format = DateFormatter()
+        format.dateFormat = dateFormat
+        format.locale = Locale(identifier: "en-US")
+        return format.string(from: self)
+    }
+}
+
 
 /*
 struct Display<Base> {
@@ -108,4 +117,5 @@ extension Display where Base: UIView {
         //"#\(model.number) \(model.state.display) on \(model.createdAt?.description ?? "--") by \(model.user.login)"
     }
 }
+
 */
