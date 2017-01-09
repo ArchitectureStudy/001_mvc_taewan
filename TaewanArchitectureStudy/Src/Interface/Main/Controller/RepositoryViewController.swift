@@ -7,7 +7,7 @@
 //
 import Foundation
 import UIKit
-import RxSwift
+import Alamofire
 
 class RepositoryViewController: UIViewController {
     
@@ -21,19 +21,12 @@ class RepositoryViewController: UIViewController {
     
     fileprivate var estimateCell: RepositoryIssueCell!
     fileprivate var estimatedSizes: [IndexPath: CGSize] = [:]
-    
-    
-    let disposeBag = DisposeBag()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         setup()
         refresh()
     }
-    
-    
 }
 
 
@@ -50,11 +43,15 @@ extension RepositoryViewController {
     
     func refresh() {
         Model.Issue
-            .rx.list(user: "JakeWharton", repo: "DiskLruCache")
-            .subscribe(onNext: { [unowned self] issues in
-                self.estimatedSizes = [:]
-                self.issues = issues
-            }).addDisposableTo(disposeBag)
+            .list(user: "JakeWharton", repo: "DiskLruCache") { result in
+                switch result {
+                case .failure(_):
+                    print("----- error -----")
+                case .success(let value):
+                    self.estimatedSizes = [:]
+                    self.issues = value
+                }
+        }
     }
 }
 
@@ -68,16 +65,14 @@ extension RepositoryViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "IssueCell", for: indexPath)
         
-        guard let model = self.issues[safe: indexPath.row] else { return cell
+        guard let model = self.issues[safe: indexPath.row] else {
+            return cell
         }
+        
         if let issueCell = cell as? RepositoryIssueCell {
             issueCell.state = model.state
             issueCell.title = model.title
-            issueCell.sub = "#\(model.number) \(model.state.display) on \(model.createdAt?.string(dateFormat: "d MMM yyyy") ?? "--") by \(model.user.login)"
-            //MMM
-//            print(model.createdAt)
-            //#54 opened on 8 Feb 2014 by Wavesonics
-            // dd MMM yyyy
+            issueCell.sub = model.subString
         }
         
         return cell
@@ -88,25 +83,21 @@ extension RepositoryViewController: UICollectionViewDataSource {
 extension RepositoryViewController: UICollectionViewDelegateFlowLayout {
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.bounds.width
-        let targetSize = CGSize(width: width, height: 48)
-        
-        guard let model = self.issues[safe: indexPath.row] else {
-            return targetSize
-        }
+        let targetSize = CGSize(width: collectionView.bounds.width, height: 48)
         
         var estimatedSize = estimatedSizes[indexPath] ?? CGSize.zero
         if estimatedSize != .zero {
             return estimatedSize
         }
         
-        
-        estimateCell.title = model.title
-        estimateCell.sub = "#\(model.number) \(model.state.display) on \(model.createdAt?.string(dateFormat: "d MMM yyyy") ?? "--") by \(model.user.login)"//여기서 중복이 일어나네..
+        if let model = self.issues[safe: indexPath.row] {
+            estimateCell.title = model.title
+            estimateCell.sub = model.subString
+        }
         
         estimatedSize = estimateCell.contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: UILayoutPriorityRequired, verticalFittingPriority: UILayoutPriorityDefaultLow)
         estimatedSizes[indexPath] = estimatedSize
-
+        
         return estimatedSize
     }
     

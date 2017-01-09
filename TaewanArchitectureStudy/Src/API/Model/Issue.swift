@@ -57,65 +57,19 @@ extension Model.Issue {
         case close = "close"
         case none = "none"
         
-        
         var display: String {
             switch self {
-            case .open:
-                return "opened"
-            case .close:
-                return "closed"
-            default:
-                return "-"
+            case .open: return "opened"
+            case .close: return "closed"
+            default: return "-"
             }
         }
     }
 }
 
 
-extension Date {
-    func string(dateFormat: String) -> String {
-        let format = DateFormatter()
-        format.dateFormat = dateFormat
-        format.locale = Locale(identifier: "en-US")
-        return format.string(from: self)
+extension Model.Issue {
+    var subString: String { //나중에 ViewModel 로 만들어줘야하나.
+        return "#\(self.number) \(self.state.display) on \(self.createdAt?.description ?? "--") by \(self.user.login)"
     }
 }
-
-
-/*
-struct Display<Base> {
-    public let base: Base
-    public init(_ base: Base) {
-        self.base = base
-    }
-}
-
-protocol DisplayCompatible {
-    associatedtype CompatibleType
-    var display: Display<CompatibleType> { get set }
-}
-
-extension DisplayCompatible {
-    
-     var display: Display<Self> {
-        get {
-            return Display(self)
-        }
-        set { }
-    }
-}
-
-
-extension UIView: DisplayCompatible {
- 
-}
-
-extension Display where Base: UIView {
-    var sub: String {
-        let model = self.base
-        return ""
-        //"#\(model.number) \(model.state.display) on \(model.createdAt?.description ?? "--") by \(model.user.login)"
-    }
-}
-
-*/

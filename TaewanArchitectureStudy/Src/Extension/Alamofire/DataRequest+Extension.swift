@@ -12,11 +12,11 @@ import SwiftyJSON
 
 
 enum BackendError: Error {
-    case network(error: NSError)
+    case network(error: Error)
     case dataSerialization(reason: String)
-    case jsonSerialization(error: NSError)
+    case jsonSerialization(error: Error)
     case objectSerialization(reason: String)
-    case xmlSerialization(error: NSError)
+    case xmlSerialization(error: Error)
 }
 
 
@@ -85,37 +85,7 @@ extension DataRequest {
         return response(responseSerializer: responseSerializer, completionHandler: completionHandler)
     }
     
-    
-    public func responseObjectAA<T: ResponseObjectSerializable>(_ completionHandler: @escaping (DataResponse<T>) -> Void) -> Self {
-        let responseSerializer = DataResponseSerializer<T> { request, response, data, error in
-            guard error == nil else {
-                DataRequest.errorMessage(response, error: error, data: data)
-                return .failure(error!)
-            }
-            
-            let result = DataRequest
-                .jsonResponseSerializer(options: .allowFragments)
-                .serializeResponse(request, response, data, error)
-            
-            switch result {
-            case .success(let value):
-                if let _ = response {
-                    let responseObject = T(json: JSON(value))
-                    return .success(responseObject)
-                } else {
-                    let failureReason = "JSON could not be serialized into response object: \(value)"
-                    let error = BackendError.objectSerialization(reason: failureReason)
-                    DataRequest.errorMessage(response, error: error, data: data)
-                    return .failure(error)
-                }
-            case .failure(let error):
-                DataRequest.errorMessage(response, error: error, data: data)
-                return .failure(error)
-            }
-        }
-        
-        return response(responseSerializer: responseSerializer, completionHandler: completionHandler)
-    }
+ 
     //객체 타입
     public func responseObject<T: ResponseObjectSerializable>(_ completionHandler: @escaping (DataResponse<T>) -> Void) -> Self {
         let responseSerializer = DataResponseSerializer<T> { request, response, data, error in

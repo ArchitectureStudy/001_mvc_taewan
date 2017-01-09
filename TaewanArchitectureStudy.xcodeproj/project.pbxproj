@@ -15,10 +15,10 @@
 		3247F1BE1E1F257800B5CD73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3247F1BC1E1F257800B5CD73 /* Main.storyboard */; };
 		3247F1C01E1F257800B5CD73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3247F1BF1E1F257800B5CD73 /* Assets.xcassets */; };
 		3247F1C31E1F257800B5CD73 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3247F1C11E1F257800B5CD73 /* LaunchScreen.storyboard */; };
+		32A3094C1E2351DB00A370A4 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A3094B1E2351DB00A370A4 /* Date+Extension.swift */; };
+		32A3094F1E23535300A370A4 /* Issue+Connect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A3094E1E23535300A370A4 /* Issue+Connect.swift */; };
 		C294DC199F5C24F606EFD5E1 /* Pods_TaewanArchitectureStudy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F17CB31F08348AACA627CAD4 /* Pods_TaewanArchitectureStudy.framework */; };
-		E575C025233E9086D6EE782F /* URLRequestConvertible+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = E575CD1099C78164D0A7E999 /* URLRequestConvertible+Rx.swift */; };
 		E575C8267F357D48FA5FD408 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E575C17C9A09B6FA7E1B1430 /* Issue.swift */; };
-		E575C8C6089410B7C867B3CF /* Issue+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = E575C3914C221DBC0FE3B377 /* Issue+Rx.swift */; };
 		E575CA0BCB7361B8A167A4CE /* Repository+Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = E575CE8E85D050C338EFD6F6 /* Repository+Router.swift */; };
 		E575CCA094B181BC4EAFE9BE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E575CA54384CC1242D0E16F8 /* User.swift */; };
 		E575CDB559F5FF7A163AD431 /* DataRequest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E575C926E331F289357B4266 /* DataRequest+Extension.swift */; };
@@ -37,13 +37,13 @@
 		3247F1BF1E1F257800B5CD73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3247F1C21E1F257800B5CD73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3247F1C41E1F257800B5CD73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		32A3094B1E2351DB00A370A4 /* Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		32A3094E1E23535300A370A4 /* Issue+Connect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Issue+Connect.swift"; sourceTree = "<group>"; };
 		870AE74D5D3CC42486E023EA /* Pods-TaewanArchitectureStudy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaewanArchitectureStudy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TaewanArchitectureStudy/Pods-TaewanArchitectureStudy.debug.xcconfig"; sourceTree = "<group>"; };
 		E575C0E998C061C6EA0AB106 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		E575C17C9A09B6FA7E1B1430 /* Issue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
-		E575C3914C221DBC0FE3B377 /* Issue+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Issue+Rx.swift"; sourceTree = "<group>"; };
 		E575C926E331F289357B4266 /* DataRequest+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataRequest+Extension.swift"; sourceTree = "<group>"; };
 		E575CA54384CC1242D0E16F8 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		E575CD1099C78164D0A7E999 /* URLRequestConvertible+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLRequestConvertible+Rx.swift"; sourceTree = "<group>"; };
 		E575CE8E85D050C338EFD6F6 /* Repository+Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Repository+Router.swift"; sourceTree = "<group>"; };
 		F17CB31F08348AACA627CAD4 /* Pods_TaewanArchitectureStudy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaewanArchitectureStudy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -98,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				12B42BF61E22281400E1711E /* Collection+Extension.swift */,
+				32A3094B1E2351DB00A370A4 /* Date+Extension.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -131,6 +132,14 @@
 				E575CA24498ED6BADEEC2A83 /* Src */,
 			);
 			path = TaewanArchitectureStudy;
+			sourceTree = "<group>";
+		};
+		32A3094D1E23532900A370A4 /* Connect */ = {
+			isa = PBXGroup;
+			children = (
+				32A3094E1E23535300A370A4 /* Issue+Connect.swift */,
+			);
+			path = Connect;
 			sourceTree = "<group>";
 		};
 		A266582BB3CBA8713DBE5435 /* Frameworks */ = {
@@ -175,14 +184,6 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		E575C4129D4AF42C7D50EF4A /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				E575C3914C221DBC0FE3B377 /* Issue+Rx.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		E575C87C206A85EE89742DB4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -192,38 +193,21 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		E575C898637DDD7EB056698A /* Alamofire */ = {
-			isa = PBXGroup;
-			children = (
-				E575CD1099C78164D0A7E999 /* URLRequestConvertible+Rx.swift */,
-			);
-			path = Alamofire;
-			sourceTree = "<group>";
-		};
 		E575CA24498ED6BADEEC2A83 /* Src */ = {
 			isa = PBXGroup;
 			children = (
 				121FDFFA1E22171A00CE18E8 /* Interface */,
 				E575C3B0EB2088B49AD81CAD /* Extension */,
-				E575CA2F4D001A5D09C831D0 /* Rx */,
 				E575CD184D63AF3497DDD56D /* API */,
 			);
 			path = Src;
-			sourceTree = "<group>";
-		};
-		E575CA2F4D001A5D09C831D0 /* Rx */ = {
-			isa = PBXGroup;
-			children = (
-				E575C898637DDD7EB056698A /* Alamofire */,
-				E575C4129D4AF42C7D50EF4A /* Model */,
-			);
-			path = Rx;
 			sourceTree = "<group>";
 		};
 		E575CD184D63AF3497DDD56D /* API */ = {
 			isa = PBXGroup;
 			children = (
 				E575C0E998C061C6EA0AB106 /* API.swift */,
+				32A3094D1E23532900A370A4 /* Connect */,
 				E575C87C206A85EE89742DB4 /* Model */,
 				E575C11B4A38BB002EA7C419 /* Router */,
 			);
@@ -330,7 +314,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		DA882B03FCBFA11D7B4412A4 /* [CP] Copy Pods Resources */ = {
@@ -358,14 +342,14 @@
 				12B42BF71E22281400E1711E /* Collection+Extension.swift in Sources */,
 				3247F1B91E1F257800B5CD73 /* AppDelegate.swift in Sources */,
 				E575CDB559F5FF7A163AD431 /* DataRequest+Extension.swift in Sources */,
-				E575C025233E9086D6EE782F /* URLRequestConvertible+Rx.swift in Sources */,
 				E575CFBC3EE3D1027C9D42D5 /* API.swift in Sources */,
+				32A3094C1E2351DB00A370A4 /* Date+Extension.swift in Sources */,
 				121FDFFF1E22171A00CE18E8 /* RepositoryViewController.swift in Sources */,
-				E575C8267F357D48FA5FD408 /* Issue.swift in Sources */,
 				E575CCA094B181BC4EAFE9BE /* User.swift in Sources */,
+				E575C8267F357D48FA5FD408 /* Issue.swift in Sources */,
+				32A3094F1E23535300A370A4 /* Issue+Connect.swift in Sources */,
 				121FE0021E22174100CE18E8 /* RepositoryIssueCell.swift in Sources */,
 				E575CA0BCB7361B8A167A4CE /* Repository+Router.swift in Sources */,
-				E575C8C6089410B7C867B3CF /* Issue+Rx.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

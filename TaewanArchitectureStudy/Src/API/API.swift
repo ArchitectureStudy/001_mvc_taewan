@@ -8,10 +8,9 @@
 
 import Foundation
 import Alamofire
+import SwiftyJSON
 
 fileprivate let baseURLString: String = "https://api.github.com"
-
-
 
 /// Model
 public struct Model {
@@ -79,3 +78,19 @@ extension RouterRequestConvertible {
     }
 }
 
+
+extension RouterRequestConvertible {
+    
+    public func responseSwiftyJSON(_ completionHandler: @escaping (DataResponse<JSON>) -> Void) -> DataRequest {
+        return Alamofire.request(self).responseSwiftyJSON(completionHandler)
+    }
+    
+    public func responseObject<T: ResponseObjectSerializable>(_ completionHandler: @escaping (DataResponse<T>) -> Void) -> DataRequest {
+        return Alamofire.request(self).responseObject(completionHandler)
+    }
+    
+    public func responseCollection<T: ResponseObjectSerializable>(_ completionHandler: @escaping (DataResponse<[T]>) -> Void) -> DataRequest {
+        return Alamofire.request(self).responseCollection(completionHandler)
+    }
+    
+}

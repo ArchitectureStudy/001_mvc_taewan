@@ -1,28 +1,21 @@
 PODS:
   - Alamofire (4.2.0)
   - NibDesignable (3.0.0)
-  - RxCocoa (3.1.0):
-    - RxSwift (~> 3.1)
-  - RxSwift (3.1.0)
   - SwiftyJSON (3.1.3)
   - Then (2.1.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.2)
   - NibDesignable (~> 3.0)
-  - RxCocoa (~> 3.0)
-  - RxSwift (~> 3.0)
   - SwiftyJSON (~> 3.1)
   - Then
 
 SPEC CHECKSUMS:
   Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
   NibDesignable: 6ccf1e54135cb05be0a78f803b9a8d78125a7d6d
-  RxCocoa: 50d7564866da9299161e86a263ce12a0873904d8
-  RxSwift: 83ff553e7593fdfdcb2562933a64c0284dffdadc
   SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
   Then: 8496793c8fcac95482b943909b440724c7d8d82c
 
-PODFILE CHECKSUM: 667a058694513294b85aaedf18ab18ba5aa98902
+PODFILE CHECKSUM: 32004bea6e7a636b7ca05feeec99215439e1849d
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.0.1

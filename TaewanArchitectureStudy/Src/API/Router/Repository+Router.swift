@@ -4,15 +4,11 @@
 //
 
 import Foundation
-import RxSwift
 import Alamofire
 
 
-/// 뭔가 이렇게 하기는 불편한거 같은데...
-public protocol RequestRepository { }
-
 extension Router {
-    public enum Repository: RouterRequestConvertible, RequestRepository {
+    public enum Repository: RouterRequestConvertible {
         case issues(user: String, repo: String, page: Int?)
         case issue(user: String, repo: String, number: Int)
     }
