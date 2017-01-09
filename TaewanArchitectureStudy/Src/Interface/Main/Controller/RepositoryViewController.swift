@@ -72,7 +72,7 @@ extension RepositoryViewController: UICollectionViewDataSource {
         if let issueCell = cell as? RepositoryIssueCell {
             issueCell.state = model.state
             issueCell.title = model.title
-            issueCell.sub = model.subString
+            issueCell.sub = cellSubString(model)
         }
         
         return cell
@@ -92,7 +92,7 @@ extension RepositoryViewController: UICollectionViewDelegateFlowLayout {
         
         if let model = self.issues[safe: indexPath.row] {
             estimateCell.title = model.title
-            estimateCell.sub = model.subString
+            estimateCell.sub = cellSubString(model)
         }
         
         estimatedSize = estimateCell.contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: UILayoutPriorityRequired, verticalFittingPriority: UILayoutPriorityDefaultLow)
@@ -101,4 +101,13 @@ extension RepositoryViewController: UICollectionViewDelegateFlowLayout {
         return estimatedSize
     }
     
+}
+
+
+
+// MARK: - Helper
+extension RepositoryViewController {
+    func cellSubString(_ model: Model.Issue) -> String {
+        return "#\(model.number) \(model.state.display) on \(model.createdAt?.description ?? "--") by \(model.user.login)"
+    }
 }

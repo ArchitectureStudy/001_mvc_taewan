@@ -66,10 +66,3 @@ extension Model.Issue {
         }
     }
 }
-
-
-extension Model.Issue {
-    var subString: String { //나중에 ViewModel 로 만들어줘야하나.
-        return "#\(self.number) \(self.state.display) on \(self.createdAt?.description ?? "--") by \(self.user.login)"
-    }
-}
