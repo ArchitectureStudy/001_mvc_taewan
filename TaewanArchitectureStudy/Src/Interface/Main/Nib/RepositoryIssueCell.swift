@@ -26,7 +26,7 @@ class RepositoryIssueCell: NibDesignableCollectionViewCell {
         set { subLabel.text = newValue }
     }
     
-    var state: Model.Issue.State? = nil {
+    var state: DTO.Issue.State? = nil {
         didSet {
             stateButton.isSelected = state == .close
         }

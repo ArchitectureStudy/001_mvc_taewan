@@ -13,15 +13,11 @@ class RepositoryViewController: UIViewController {
     
     @IBOutlet var collectionView: UICollectionView!
     
-    var issues: [Model.Issue] = [] {
-        didSet {
-            collectionView.reloadData()
-        }
-    }
+    var model: Model.IssuesModel!
     
     fileprivate var estimateCell: RepositoryIssueCell!
     fileprivate var estimatedSizes: [IndexPath: CGSize] = [:]
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -33,6 +29,7 @@ class RepositoryViewController: UIViewController {
 // MARK: - Setup
 extension RepositoryViewController {
     func setup() {
+        model = Model.IssuesModel(user: "JakeWharton", repo: "DiskLruCache")
         estimateCell = RepositoryIssueCell()
     }
 }
@@ -42,15 +39,8 @@ extension RepositoryViewController {
 extension RepositoryViewController {
     
     func refresh() {
-        Model.Issue
-            .list(user: "JakeWharton", repo: "DiskLruCache") { result in
-                switch result {
-                case .failure(_):
-                    print("----- error -----")
-                case .success(let value):
-                    self.estimatedSizes = [:]
-                    self.issues = value
-                }
+        model.refresh().response { _ in
+            self.collectionView.reloadData()
         }
     }
 }
@@ -59,13 +49,13 @@ extension RepositoryViewController {
 extension RepositoryViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return issues.count
+        return model.list.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "IssueCell", for: indexPath)
         
-        guard let model = self.issues[safe: indexPath.row] else {
+        guard let model = model.list[safe: indexPath.row] else {
             return cell
         }
         
@@ -74,7 +64,6 @@ extension RepositoryViewController: UICollectionViewDataSource {
             issueCell.title = model.title
             issueCell.sub = cellSubString(model)
         }
-        
         return cell
     }
     
@@ -90,7 +79,7 @@ extension RepositoryViewController: UICollectionViewDelegateFlowLayout {
             return estimatedSize
         }
         
-        if let model = self.issues[safe: indexPath.row] {
+        if let model = model.list[safe: indexPath.row] {
             estimateCell.title = model.title
             estimateCell.sub = cellSubString(model)
         }
@@ -101,13 +90,17 @@ extension RepositoryViewController: UICollectionViewDelegateFlowLayout {
         return estimatedSize
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "Show", sender:  model.list[safe: indexPath.row])
+    }
+    
 }
 
 
 
 // MARK: - Helper
 extension RepositoryViewController {
-    func cellSubString(_ model: Model.Issue) -> String {
+    func cellSubString(_ model: DTO.Issue) -> String {
         return "#\(model.number) \(model.state.display) on \(model.createdAt?.description ?? "--") by \(model.user.login)"
     }
 }

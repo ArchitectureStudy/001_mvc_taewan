@@ -13,10 +13,12 @@ import SwiftyJSON
 fileprivate let baseURLString: String = "https://api.github.com"
 
 /// Model
+public struct DTO {
+    /// API/DTO/* 폴더에 만들어서 사용한다.
+}
 public struct Model {
     /// API/Model/* 폴더에 만들어서 사용한다.
 }
-
 
 
 /// Router

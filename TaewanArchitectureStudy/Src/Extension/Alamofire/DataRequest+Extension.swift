@@ -42,7 +42,7 @@ public extension ResponseCollectionSerializable {
 
 
 extension DataRequest {
-        
+    
     public func responseVoid(_ completionHandler: @escaping (DataResponse<Void>) -> Void) -> Self {
         let responseSerializer = DataResponseSerializer<Void> { request, response, data, error in
             guard error == nil else {
@@ -51,7 +51,8 @@ extension DataRequest {
             }
             return .success()
         }
-        return self.response(responseSerializer: responseSerializer, completionHandler: completionHandler)
+        
+        return response(responseSerializer: responseSerializer, completionHandler: completionHandler)
     }
     
     
@@ -81,7 +82,18 @@ extension DataRequest {
                 return .failure(error)
             }
         }
-        
+//        responseJSON { response in
+//            switch response.result {
+//            case .failure(let error):
+//                break
+//            case .success(let data):
+//                let json = JSON(data)
+//                DataRequest.se
+//                    .serializeResponse(request, response, data, error)
+//
+//                completionHandler(.success(json))
+//            }
+//        }
         return response(responseSerializer: responseSerializer, completionHandler: completionHandler)
     }
     
@@ -163,4 +175,5 @@ extension DataRequest {
     }
     
 }
+
 

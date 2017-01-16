@@ -10,10 +10,10 @@ import Foundation
 
 
 extension Date {
-    func string(dateFormat: String) -> String {
+    func string(dateFormat: String, locale: String = "en-US") -> String {
         let format = DateFormatter()
         format.dateFormat = dateFormat
-        format.locale = Locale(identifier: "en-US")
+        format.locale = Locale(identifier: locale)
         return format.string(from: self)
     }
 }
