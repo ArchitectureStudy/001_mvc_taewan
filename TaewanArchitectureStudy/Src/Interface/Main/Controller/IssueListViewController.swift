@@ -9,13 +9,13 @@ import Foundation
 import UIKit
 import Alamofire
 
-class RepositoryViewController: UIViewController {
+class IssueListViewController: UIViewController {
     
     @IBOutlet var collectionView: UICollectionView!
     
     var model: Model.IssuesModel!
     
-    fileprivate var estimateCell: RepositoryIssueCell!
+    fileprivate var estimateCell: IssueCell!
     fileprivate var estimatedSizes: [IndexPath: CGSize] = [:]
     
     override func viewDidLoad() {
@@ -27,16 +27,16 @@ class RepositoryViewController: UIViewController {
 
 
 // MARK: - Setup
-extension RepositoryViewController {
+extension IssueListViewController {
     func setup() {
         model = Model.IssuesModel(user: "JakeWharton", repo: "DiskLruCache")
-        estimateCell = RepositoryIssueCell()
+        estimateCell = IssueCell()
     }
 }
 
 
 // MARK: - Network
-extension RepositoryViewController {
+extension IssueListViewController {
     
     func refresh() {
         model.refresh().response { _ in
@@ -46,7 +46,7 @@ extension RepositoryViewController {
 }
 
 
-extension RepositoryViewController: UICollectionViewDataSource {
+extension IssueListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return model.list.count
@@ -59,7 +59,7 @@ extension RepositoryViewController: UICollectionViewDataSource {
             return cell
         }
         
-        if let issueCell = cell as? RepositoryIssueCell {
+        if let issueCell = cell as? IssueCell {
             issueCell.state = model.state
             issueCell.title = model.title
             issueCell.sub = cellSubString(model)
@@ -69,7 +69,7 @@ extension RepositoryViewController: UICollectionViewDataSource {
     
 }
 
-extension RepositoryViewController: UICollectionViewDelegateFlowLayout {
+extension IssueListViewController: UICollectionViewDelegateFlowLayout {
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let targetSize = CGSize(width: collectionView.bounds.width, height: 48)
@@ -99,7 +99,7 @@ extension RepositoryViewController: UICollectionViewDelegateFlowLayout {
 
 
 // MARK: - Helper
-extension RepositoryViewController {
+extension IssueListViewController {
     func cellSubString(_ model: DTO.Issue) -> String {
         return "#\(model.number) \(model.state.display) on \(model.createdAt?.description ?? "--") by \(model.user.login)"
     }

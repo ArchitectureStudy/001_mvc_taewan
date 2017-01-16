@@ -1,5 +1,5 @@
 //
-//  RepositoryIssueCell.swift
+//  IssueCell.swift
 //  TaewanArchitectureStudy
 //
 //  Created by taewan on 2017. 1. 8..
@@ -9,7 +9,7 @@
 import UIKit
 import NibDesignable
 
-class RepositoryIssueCell: NibDesignableCollectionViewCell {
+class IssueCell: NibDesignableCollectionViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subLabel: UILabel!

@@ -16,6 +16,8 @@ class IssueDetailViewController: UIViewController {
 
     @IBOutlet weak var collectionView: HDCollectionView!
     
+    var model: Model.IssueModel!
+    var 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,3 +26,10 @@ class IssueDetailViewController: UIViewController {
     
 }
 
+
+// MARK: - Setup
+extension IssueDetailViewController {
+    func setup() {
+        model = Model.IssueModel(user: "JakeWharton", repo: "DiskLruCache", number: 1)
+    }
+}

@@ -10,48 +10,37 @@ import Foundation
 import Alamofire
 
 extension Model {
-    public class IssuesModel {
-        public var user: String
-        public var repo: String
+    public class IssueModel {
+        private var user: String
+        private var repo: String
+        private var number: Int
         
-        init(user: String, repo: String) {
+        init(user: String, repo: String, number: Int) {
             self.user = user
             self.repo = repo
+            self.number = number
         }
         
-        private var page: Int = 1
         
-        public private(set) var list: [DTO.Issue] = []
+        public private(set) var issue: DTO.Issue?
         
         func refresh() -> DataRequest {
-            self.page = 1
             return Router.Repository
-                .issues(user: user, repo: repo, page: nil)
-                .responseCollection { (response: DataResponse<[DTO.Issue]>) in
+                .issue(user: user, repo: repo, number: number)
+                .responseObject { (response: DataResponse<DTO.Issue>) in
                     switch response.result {
                     case .success(let value):
-                        self.list = value
-                        self.page += 1
+                        self.issue = value
                     case .failure(let error):
                         debugPrint(error)
                     }
-            }
+                }
         }
         
-        func loadMore() -> DataRequest {
-            return Router.Repository
-                .issues(user: user, repo: repo, page: self.page)
-                .responseCollection { (response: DataResponse<[DTO.Issue]>) in
-                    switch response.result {
-                    case .success(let value):
-                        self.list += value
-                        self.page += 1
-                    case .failure(let error):
-                        debugPrint(error)
-                    }
-            }
-        }//load
         
+        func comment(body: String) {
+            
+        }
     }
     
 }
