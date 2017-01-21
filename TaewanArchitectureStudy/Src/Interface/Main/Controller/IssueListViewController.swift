@@ -55,14 +55,12 @@ extension IssueListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "IssueCell", for: indexPath)
         
-        guard let model = model.list[safe: indexPath.row] else {
+        guard let data = model.list[safe: indexPath.row] else {
             return cell
         }
         
         if let issueCell = cell as? IssueCell {
-            issueCell.state = model.state
-            issueCell.title = model.title
-            issueCell.sub = cellSubString(model)
+            issueCell.update(data: data)
         }
         return cell
     }
@@ -79,9 +77,8 @@ extension IssueListViewController: UICollectionViewDelegateFlowLayout {
             return estimatedSize
         }
         
-        if let model = model.list[safe: indexPath.row] {
-            estimateCell.title = model.title
-            estimateCell.sub = cellSubString(model)
+        if let data = model.list[safe: indexPath.row] {
+            estimateCell.update(data: data)
         }
         
         estimatedSize = estimateCell.contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: UILayoutPriorityRequired, verticalFittingPriority: UILayoutPriorityDefaultLow)
@@ -96,11 +93,3 @@ extension IssueListViewController: UICollectionViewDelegateFlowLayout {
     
 }
 
-
-
-// MARK: - Helper
-extension IssueListViewController {
-    func cellSubString(_ model: DTO.Issue) -> String {
-        return "#\(model.number) \(model.state.display) on \(model.createdAt?.description ?? "--") by \(model.user.login)"
-    }
-}

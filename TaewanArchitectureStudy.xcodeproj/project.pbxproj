@@ -11,6 +11,10 @@
 		121FE0021E22174100CE18E8 /* IssueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121FE0001E22174100CE18E8 /* IssueCell.swift */; };
 		121FE0031E22174100CE18E8 /* IssueCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 121FE0011E22174100CE18E8 /* IssueCell.xib */; };
 		12B42BF71E22281400E1711E /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B42BF61E22281400E1711E /* Collection+Extension.swift */; };
+		12C5302E1E330C5F0072FAD1 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C5302D1E330C5F0072FAD1 /* Router.swift */; };
+		12C530351E3318120072FAD1 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C530321E3318120072FAD1 /* Comment.swift */; };
+		12C530361E3318120072FAD1 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C530331E3318120072FAD1 /* Issue.swift */; };
+		12C530371E3318120072FAD1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C530341E3318120072FAD1 /* User.swift */; };
 		3211F36A1E2CB80800BE6B32 /* HDCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3211F3691E2CB80800BE6B32 /* HDCollectionView.swift */; };
 		3211F3701E2CB9E800BE6B32 /* IssueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3211F36F1E2CB9E800BE6B32 /* IssueDetailViewController.swift */; };
 		3211F3731E2CBACC00BE6B32 /* IssueCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3211F3711E2CBACC00BE6B32 /* IssueCommentCell.swift */; };
@@ -19,14 +23,10 @@
 		3247F1BE1E1F257800B5CD73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3247F1BC1E1F257800B5CD73 /* Main.storyboard */; };
 		3247F1C01E1F257800B5CD73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3247F1BF1E1F257800B5CD73 /* Assets.xcassets */; };
 		3247F1C31E1F257800B5CD73 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3247F1C11E1F257800B5CD73 /* LaunchScreen.storyboard */; };
-		328A9D3A1E2C5D91007674FF /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328A9D381E2C5D91007674FF /* Issue.swift */; };
-		328A9D3B1E2C5D91007674FF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328A9D391E2C5D91007674FF /* User.swift */; };
 		328A9D3E1E2C64D5007674FF /* IssuesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328A9D3D1E2C64D5007674FF /* IssuesModel.swift */; };
 		32A3094C1E2351DB00A370A4 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A3094B1E2351DB00A370A4 /* Date+Extension.swift */; };
-		32A3094F1E23535300A370A4 /* Issue+Connect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A3094E1E23535300A370A4 /* Issue+Connect.swift */; };
 		32DEA2BF1E2CC1890001CC6B /* IssueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DEA2BE1E2CC1890001CC6B /* IssueModel.swift */; };
 		C294DC199F5C24F606EFD5E1 /* Pods_TaewanArchitectureStudy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F17CB31F08348AACA627CAD4 /* Pods_TaewanArchitectureStudy.framework */; };
-		E575CA0BCB7361B8A167A4CE /* Repository+Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = E575CE8E85D050C338EFD6F6 /* Repository+Router.swift */; };
 		E575CDB559F5FF7A163AD431 /* DataRequest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E575C926E331F289357B4266 /* DataRequest+Extension.swift */; };
 		E575CFBC3EE3D1027C9D42D5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = E575C0E998C061C6EA0AB106 /* API.swift */; };
 /* End PBXBuildFile section */
@@ -36,6 +36,10 @@
 		121FE0001E22174100CE18E8 /* IssueCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueCell.swift; sourceTree = "<group>"; };
 		121FE0011E22174100CE18E8 /* IssueCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IssueCell.xib; sourceTree = "<group>"; };
 		12B42BF61E22281400E1711E /* Collection+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Collection+Extension.swift"; sourceTree = "<group>"; };
+		12C5302D1E330C5F0072FAD1 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		12C530321E3318120072FAD1 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		12C530331E3318120072FAD1 /* Issue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
+		12C530341E3318120072FAD1 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2AA3EF8FE28E8A26B879B271 /* Pods-TaewanArchitectureStudy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaewanArchitectureStudy.release.xcconfig"; path = "Pods/Target Support Files/Pods-TaewanArchitectureStudy/Pods-TaewanArchitectureStudy.release.xcconfig"; sourceTree = "<group>"; };
 		3211F3691E2CB80800BE6B32 /* HDCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCollectionView.swift; sourceTree = "<group>"; };
 		3211F36F1E2CB9E800BE6B32 /* IssueDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueDetailViewController.swift; sourceTree = "<group>"; };
@@ -47,16 +51,12 @@
 		3247F1BF1E1F257800B5CD73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3247F1C21E1F257800B5CD73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3247F1C41E1F257800B5CD73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		328A9D381E2C5D91007674FF /* Issue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
-		328A9D391E2C5D91007674FF /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		328A9D3D1E2C64D5007674FF /* IssuesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssuesModel.swift; sourceTree = "<group>"; };
 		32A3094B1E2351DB00A370A4 /* Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
-		32A3094E1E23535300A370A4 /* Issue+Connect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Issue+Connect.swift"; sourceTree = "<group>"; };
 		32DEA2BE1E2CC1890001CC6B /* IssueModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueModel.swift; sourceTree = "<group>"; };
 		870AE74D5D3CC42486E023EA /* Pods-TaewanArchitectureStudy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaewanArchitectureStudy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TaewanArchitectureStudy/Pods-TaewanArchitectureStudy.debug.xcconfig"; sourceTree = "<group>"; };
 		E575C0E998C061C6EA0AB106 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		E575C926E331F289357B4266 /* DataRequest+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataRequest+Extension.swift"; sourceTree = "<group>"; };
-		E575CE8E85D050C338EFD6F6 /* Repository+Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Repository+Router.swift"; sourceTree = "<group>"; };
 		F17CB31F08348AACA627CAD4 /* Pods_TaewanArchitectureStudy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaewanArchitectureStudy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -118,6 +118,16 @@
 			path = Foundation;
 			sourceTree = "<group>";
 		};
+		12C530311E3318120072FAD1 /* DataObject */ = {
+			isa = PBXGroup;
+			children = (
+				12C530321E3318120072FAD1 /* Comment.swift */,
+				12C530331E3318120072FAD1 /* Issue.swift */,
+				12C530341E3318120072FAD1 /* User.swift */,
+			);
+			path = DataObject;
+			sourceTree = "<group>";
+		};
 		3211F3681E2CB80800BE6B32 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -157,15 +167,6 @@
 			path = TaewanArchitectureStudy;
 			sourceTree = "<group>";
 		};
-		328A9D371E2C5D91007674FF /* DTO */ = {
-			isa = PBXGroup;
-			children = (
-				328A9D381E2C5D91007674FF /* Issue.swift */,
-				328A9D391E2C5D91007674FF /* User.swift */,
-			);
-			path = DTO;
-			sourceTree = "<group>";
-		};
 		328A9D3C1E2C5EDF007674FF /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -173,14 +174,6 @@
 				32DEA2BE1E2CC1890001CC6B /* IssueModel.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		32A3094D1E23532900A370A4 /* Connect */ = {
-			isa = PBXGroup;
-			children = (
-				32A3094E1E23535300A370A4 /* Issue+Connect.swift */,
-			);
-			path = Connect;
 			sourceTree = "<group>";
 		};
 		A266582BB3CBA8713DBE5435 /* Frameworks */ = {
@@ -198,14 +191,6 @@
 				2AA3EF8FE28E8A26B879B271 /* Pods-TaewanArchitectureStudy.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		E575C11B4A38BB002EA7C419 /* Router */ = {
-			isa = PBXGroup;
-			children = (
-				E575CE8E85D050C338EFD6F6 /* Repository+Router.swift */,
-			);
-			path = Router;
 			sourceTree = "<group>";
 		};
 		E575C12FBBB2CBF8EFFAE56F /* Alamofire */ = {
@@ -239,11 +224,10 @@
 		E575CD184D63AF3497DDD56D /* API */ = {
 			isa = PBXGroup;
 			children = (
+				12C5302D1E330C5F0072FAD1 /* Router.swift */,
 				E575C0E998C061C6EA0AB106 /* API.swift */,
 				328A9D3C1E2C5EDF007674FF /* Model */,
-				328A9D371E2C5D91007674FF /* DTO */,
-				32A3094D1E23532900A370A4 /* Connect */,
-				E575C11B4A38BB002EA7C419 /* Router */,
+				12C530311E3318120072FAD1 /* DataObject */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -349,7 +333,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		DA882B03FCBFA11D7B4412A4 /* [CP] Copy Pods Resources */ = {
@@ -378,18 +362,18 @@
 				3247F1B91E1F257800B5CD73 /* AppDelegate.swift in Sources */,
 				E575CDB559F5FF7A163AD431 /* DataRequest+Extension.swift in Sources */,
 				3211F3701E2CB9E800BE6B32 /* IssueDetailViewController.swift in Sources */,
+				12C5302E1E330C5F0072FAD1 /* Router.swift in Sources */,
 				E575CFBC3EE3D1027C9D42D5 /* API.swift in Sources */,
 				32DEA2BF1E2CC1890001CC6B /* IssueModel.swift in Sources */,
+				12C530371E3318120072FAD1 /* User.swift in Sources */,
 				32A3094C1E2351DB00A370A4 /* Date+Extension.swift in Sources */,
-				328A9D3A1E2C5D91007674FF /* Issue.swift in Sources */,
 				121FDFFF1E22171A00CE18E8 /* IssueListViewController.swift in Sources */,
-				32A3094F1E23535300A370A4 /* Issue+Connect.swift in Sources */,
+				12C530351E3318120072FAD1 /* Comment.swift in Sources */,
 				121FE0021E22174100CE18E8 /* IssueCell.swift in Sources */,
 				3211F36A1E2CB80800BE6B32 /* HDCollectionView.swift in Sources */,
 				328A9D3E1E2C64D5007674FF /* IssuesModel.swift in Sources */,
 				3211F3731E2CBACC00BE6B32 /* IssueCommentCell.swift in Sources */,
-				E575CA0BCB7361B8A167A4CE /* Repository+Router.swift in Sources */,
-				328A9D3B1E2C5D91007674FF /* User.swift in Sources */,
+				12C530361E3318120072FAD1 /* Issue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

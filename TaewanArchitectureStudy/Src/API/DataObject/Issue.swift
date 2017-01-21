@@ -10,12 +10,12 @@ import Foundation
 import SwiftyJSON
 
 
-extension DTO {
+extension DataObject {
     public struct Issue: ResponseCollectionSerializable, ResponseObjectSerializable {
         let id: Int
         let number: Int
         let title: String
-        let user: DTO.User
+        let user: DataObject.User
         let state: State
         let comments: Int
         let body: String
@@ -27,7 +27,7 @@ extension DTO {
             id = json["id"].intValue
             number = json["number"].intValue
             title = json["title"].stringValue
-            user = DTO.User(json: json["user"])
+            user = DataObject.User(json: json["user"])
             state = State(rawValue: json["state"].stringValue) ?? .none
             comments = json["comments"].intValue
             body = json["body"].stringValue
@@ -41,7 +41,7 @@ extension DTO {
     }
 }
 
-extension DTO.Issue {
+extension DataObject.Issue {
     enum State: String {
         case open = "open", close = "close", none = "none"
         

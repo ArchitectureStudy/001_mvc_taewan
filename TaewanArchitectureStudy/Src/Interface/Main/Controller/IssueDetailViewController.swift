@@ -17,12 +17,15 @@ class IssueDetailViewController: UIViewController {
     @IBOutlet weak var collectionView: HDCollectionView!
     
     var model: Model.IssueModel!
-    var 
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.alwaysBounceVertical = true
+//        collectionView.alwaysBounceVertical = true
+        setup()
+        refresh()
     }
+    
     
 }
 
@@ -32,4 +35,22 @@ extension IssueDetailViewController {
     func setup() {
         model = Model.IssueModel(user: "JakeWharton", repo: "DiskLruCache", number: 1)
     }
+    
+    func refresh() {
+        model.refresh().response { [weak self] _ in
+            self?.titleLabel.text = self?.model.issue?.title
+            
+        }
+        
+        model.refreshComments().response { _ in
+            
+        }
+    }
 }
+
+
+//
+//
+//extension IssueDetailViewController: UICollectionViewDataSource {
+//    
+//}

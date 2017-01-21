@@ -10,26 +10,22 @@ import UIKit
 import NibDesignable
 
 class IssueCell: NibDesignableCollectionViewCell {
-
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subLabel: UILabel!
     
     @IBOutlet weak var stateButton: UIButton!
     
-    var title: String? {
-        get { return titleLabel.text }
-        set { titleLabel.text = newValue }
+}
+
+
+extension IssueCell: DataObjectUpdatable {
+
+    func update(data: DataObject.Issue, withImage: Bool = false) {
+        let createdAt = data.createdAt?.string(dateFormat: "DD MMM yyyy") ?? "-"
+        
+        titleLabel.text = data.title
+        subLabel.text = "#\(data.number) \(data.state.display) on \(createdAt) by \(data.user.login)"
+        stateButton.isSelected = data.state == .close
     }
-    
-    var sub: String? {
-        get { return subLabel.text }
-        set { subLabel.text = newValue }
-    }
-    
-    var state: DTO.Issue.State? = nil {
-        didSet {
-            stateButton.isSelected = state == .close
-        }
-    }
-    
 }

@@ -12,120 +12,59 @@ import UIKit
 @IBDesignable
 open class HDCollectionView: UICollectionView {
     
-    @IBOutlet open weak var headerView: UIView? {
+    @IBOutlet public weak var headerView: UIView? {
         didSet {
-            if let oldView = oldValue {
-                oldView.removeFromSuperview()
-            }
+            if let oldView = oldValue {  oldView.removeFromSuperview() }
             addHeaderView()
         }
     }
-    @IBOutlet open weak var footerView: UIView? {
+    @IBOutlet public weak var footerView: UIView? {
         didSet {
-            if let oldView = oldValue {
-                oldView.removeFromSuperview()
-            }
+            if let oldView = oldValue { oldView.removeFromSuperview() }
             addFooterView()
         }
     }
     
-    @IBInspectable open var fixedHeader: Bool = false
-    
-    @IBInspectable open var offsetTop: CGFloat = 0 {
-        didSet {
-            updateOffsetTop()
-        }
+    @IBInspectable public var offsetHeader: CGFloat = 0 {
+        didSet {  updateOffsetHeader() }
     }
     
-    @IBInspectable open var offsetBottom: CGFloat = 0 {
-        didSet {
-            updateOffsetBoottom()
-        }
+    @IBInspectable public var offsetFooter: CGFloat = 0 {
+        didSet { updateOffsetFooter() }
     }
     
-    open var headerViewSize: CGSize {
-        return getHeaderViewFitSize()
-    }
-    open var footerViewSize: CGSize {
-        return getFooterViewFitSize()
-    }
-    
-    
-    private var oldFixed = true
-    
-    open override var contentInset: UIEdgeInsets {
-        didSet {
-            if oldValue == contentInset || fixedHeader == false {
-                return
-            }
-            guard let headerView = self.headerView, headerView.superview == self else {
-                return
-            }
-            headerView.transform = CGAffineTransform.identity
-            headerView.frame.origin.y = -contentInset.top
-            let ty = min(0, contentOffset.y + contentInset.top)
-            if ty <= 0 {
-                headerView.transform = CGAffineTransform(translationX: 0, y: ty)
-            }
-        }
-    }
-    
-    open override var contentOffset: CGPoint {
-        didSet {
-            if oldValue == contentOffset || fixedHeader == false {
-                return
-            }
-            guard let headerView = self.headerView, headerView.superview == self else {
-                return
-            }
-            
-            let ty = min(0, contentOffset.y + contentInset.top)
-            if ty <= 0  && (contentInset.top/2) <= (contentOffset.y * -1) {
-                headerView.transform = CGAffineTransform(translationX: 0, y: ty)
-            }
-        }
-    }
-    
-    open override var contentSize: CGSize {
-        didSet {
-            updateOffsetBoottom()
-        }
-    }
-    
-    
-    //이거가 조금 이상하네..
-    open func scrollIndicatorHeader(_ offset: CGFloat = 0) {
-        if headerView == nil {
-            return
-        }
-        DispatchQueue.main.async { [weak self] in
-            guard let me = self else {
-                return
-            }
-            let insets = me.scrollIndicatorInsets
-            me.scrollIndicatorInsets.top = insets.top + me.headerViewSize.height + offset
-        }
-    }
+    @IBInspectable public var fixedHeader: Bool = false
 }
 
 
 extension HDCollectionView {
-    //중간에 높이가 다이나믹하게 변경될때는 어떻게 처리 할것인가?
-    public func updateOffsetTop() {
+    public func updateOffsetHeader() {
         if let headerView = self.headerView {
             let size = headerViewSize
             headerView.setNeedsLayout()
             headerView.layoutIfNeeded()
-            headerView.frame.size.height = size.height
             
-            contentInset.top = offsetTop + size.height
-            headerView.frame.origin.y = -contentInset.top
+            switch scrollDirection {
+            case .vertical:
+                headerView.frame.size.height = size.height
+                contentInset.top = offsetHeader + size.height
+                headerView.frame.origin.y = -contentInset.top
+            case .horizontal:
+                headerView.frame.size.width = size.width
+                contentInset.left = offsetHeader + size.width
+                headerView.frame.origin.x = -contentInset.left
+            }
         } else {
-            contentInset.top = offsetTop
+            switch scrollDirection {
+            case .vertical:
+                contentInset.top = offsetHeader
+            case .horizontal:
+                contentInset.left = offsetHeader
+            }
         }
     }
     
-    public func updateOffsetBoottom() {
+    public func updateOffsetFooter() {
         if let footerView = self.footerView {
             let size = footerViewSize
             footerView.setNeedsLayout()
@@ -133,9 +72,9 @@ extension HDCollectionView {
             footerView.frame.size.height = size.height
             footerView.frame.origin.y = contentSize.height
             
-            contentInset.bottom = offsetBottom + size.height
+            contentInset.bottom = offsetFooter + size.height
         } else {
-            contentInset.bottom = offsetBottom
+            contentInset.bottom = offsetFooter
         }
     }
     
@@ -145,54 +84,161 @@ extension HDCollectionView {
 private extension HDCollectionView {
     func addHeaderView() {
         if let headerView = self.headerView, headerView.superview == nil {
-            let width = bounds.width
-            headerView.frame.size.width = width
-            headerView.autoresizingMask = [.flexibleWidth]
+            
+            switch scrollDirection {
+            case .horizontal:
+                headerView.frame.size.height = bounds.height
+                headerView.autoresizingMask = [.flexibleHeight]
+            case .vertical:
+                headerView.frame.size.width = bounds.width
+                headerView.autoresizingMask = [.flexibleWidth]
+            }
             
             addSubview(headerView)
-            updateOffsetTop()
-            contentOffset.y = -contentInset.top
+            updateOffsetHeader()
+            
+            switch scrollDirection {
+            case .horizontal:
+                contentOffset.x = -contentInset.left
+            case .vertical:
+                contentOffset.y = -contentInset.top
+            }
         }
-        
     }
     
     func addFooterView() {
         if let footerView = self.footerView, footerView.superview == nil {
-            let width = bounds.width
-            footerView.frame.size.width = width
-            footerView.autoresizingMask = [.flexibleWidth]
-            
+            switch scrollDirection {
+            case .horizontal:
+                footerView.frame.size.height = bounds.height
+                footerView.autoresizingMask = [.flexibleHeight]
+            case .vertical:
+                footerView.frame.size.width = bounds.width
+                footerView.autoresizingMask = [.flexibleWidth]
+            }
             addSubview(footerView)
-            updateOffsetBoottom()
+            updateOffsetFooter()
         }
     }
     
     
     func getHeaderViewFitSize() -> CGSize {
-        guard let headerView = self.headerView else {
-            return CGSize.zero
-        }
-        
-        let width = bounds.width
-        
-        let size = headerView.systemLayoutSizeFitting(CGSize(width: width, height: 0), withHorizontalFittingPriority: UILayoutPriorityRequired, verticalFittingPriority: UILayoutPriorityDefaultLow)
-        let height = size.height == 0 ? headerView.bounds.height : size.height
-        
-        return CGSize(width: width, height: height)
+        return extimateSize(view: self.headerView)
     }
     
-    
     func getFooterViewFitSize() -> CGSize {
-        guard let footerView = self.footerView else {
+        return extimateSize(view: self.footerView)
+    }
+    
+    private func extimateSize(view: UIView?) -> CGSize {
+        guard let targetView = view else {
             return CGSize.zero
         }
         
-        let width = bounds.width
+        let targetSize: CGSize
+        switch scrollDirection {
+        case .horizontal:
+            targetSize  = CGSize(width: 0, height: bounds.height)
+        case .vertical:
+            targetSize  = CGSize(width: bounds.width, height: 0)
+        }
         
-        let size = footerView.systemLayoutSizeFitting(CGSize(width: width, height: 0), withHorizontalFittingPriority: UILayoutPriorityRequired, verticalFittingPriority: UILayoutPriorityDefaultLow)
-        let height = size.height == 0 ? footerView.bounds.height : size.height
         
+        let size = targetView.systemLayoutSizeFitting(
+            targetSize,
+            withHorizontalFittingPriority: UILayoutPriorityRequired,
+            verticalFittingPriority: UILayoutPriorityDefaultLow
+        )
+        
+        //        targetView.sizeToFit()
+        
+        let width = size.width == 0 ? targetView.bounds.width : size.width
+        let height = size.height == 0 ? targetView.bounds.height : size.height
         return CGSize(width: width, height: height)
+        
+    }
+}
+
+
+
+
+// MARK: - Getter attribute
+extension HDCollectionView {
+    fileprivate var scrollDirection: UICollectionViewScrollDirection {
+        guard let flowLayout = self.collectionViewLayout as? UICollectionViewFlowLayout else {
+            assertionFailure("support only UICollectionViewFlowLayout")
+            return .vertical
+        }
+        return flowLayout.scrollDirection
+    }
+    
+    public var headerViewSize: CGSize {
+        return getHeaderViewFitSize()
+    }
+    public var footerViewSize: CGSize {
+        return getFooterViewFitSize()
+    }
+    
+    public var headerOffset: CGPoint {
+        return CGPoint(x: contentOffset.x + contentInset.left, y: contentOffset.y + contentInset.top)
+    }
+}
+
+// MARK: - override
+extension HDCollectionView {
+    open override var contentInset: UIEdgeInsets {
+        didSet {
+            if oldValue == contentInset || fixedHeader == false { return }
+            guard let headerView = self.headerView, headerView.superview == self else { return }
+            
+            headerView.transform = CGAffineTransform.identity
+            
+            switch scrollDirection {
+            case .horizontal:
+                headerView.frame.origin.x = -contentInset.left
+                let tx = min(0, contentOffset.x + contentInset.left)
+                if tx <= 0 {
+                    headerView.transform = CGAffineTransform(translationX: tx, y: 0)
+                }
+            case .vertical:
+                headerView.frame.origin.y = -contentInset.top
+                let ty = min(0, contentOffset.y + contentInset.top)
+                if ty <= 0 {
+                    headerView.transform = CGAffineTransform(translationX: 0, y: ty)
+                }
+            }
+            
+        }
+    }
+    
+    open override var contentOffset: CGPoint {
+        didSet {
+            if oldValue == contentOffset || fixedHeader == false { return }
+            guard let headerView = self.headerView, headerView.superview == self else { return }
+            
+            
+            switch scrollDirection {
+            case .horizontal:
+                let tx = min(0, contentOffset.x + contentInset.left)
+                if tx <= 0  && (contentInset.left/2) <= (contentOffset.x * -1) {
+                    headerView.transform = CGAffineTransform(translationX: tx, y: 0)
+                }
+            case .vertical:
+                let ty = min(0, contentOffset.y + contentInset.top)
+                if ty <= 0  && (contentInset.top/2) <= (contentOffset.y * -1) {
+                    headerView.transform = CGAffineTransform(translationX: 0, y: ty)
+                }
+            }
+            
+            
+            
+        }
+    }
+    
+    open override var contentSize: CGSize {
+        didSet {
+            updateOffsetFooter()
+        }
     }
     
 }

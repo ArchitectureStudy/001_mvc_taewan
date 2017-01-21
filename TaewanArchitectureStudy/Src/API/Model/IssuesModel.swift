@@ -13,21 +13,21 @@ extension Model {
     public class IssuesModel {
         private var user: String
         private var repo: String
+        private var page: Int = 1
+        
+        public private(set) var list: [DataObject.Issue] = []
         
         init(user: String, repo: String) {
             self.user = user
             self.repo = repo
         }
         
-        private var page: Int = 1
-        
-        public private(set) var list: [DTO.Issue] = []
-        
         func refresh() -> DataRequest {
             self.page = 1
-            return Router.Repository
-                .issues(user: user, repo: repo, page: nil)
-                .responseCollection { (response: DataResponse<[DTO.Issue]>) in
+       
+            
+            return Router.issues(user: user, repo: repo, page: nil)
+                .responseCollection { (response: DataResponse<[DataObject.Issue]>) in
                     switch response.result {
                     case .success(let value):
                         self.list = value
@@ -39,9 +39,8 @@ extension Model {
         }
         
         func loadMore() -> DataRequest {
-            return Router.Repository
-                .issues(user: user, repo: repo, page: self.page)
-                .responseCollection { (response: DataResponse<[DTO.Issue]>) in
+            return Router.issues(user: user, repo: repo, page: self.page)
+                .responseCollection { (response: DataResponse<[DataObject.Issue]>) in
                     switch response.result {
                     case .success(let value):
                         self.list += value

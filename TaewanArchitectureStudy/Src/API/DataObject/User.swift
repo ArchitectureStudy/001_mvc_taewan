@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 
 
-extension DTO {
+extension DataObject {
     public struct User: ResponseCollectionSerializable, ResponseObjectSerializable {
         let id: Int
         let login: String
@@ -22,10 +22,5 @@ extension DTO {
             avatarURL = json["avatar_url"].stringValue
         }
         
-        public init(login: String) {
-            self.id = 0
-            self.login = login
-            self.avatarURL = ""
-        }
     }
 }

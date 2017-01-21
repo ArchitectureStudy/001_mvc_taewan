@@ -15,19 +15,18 @@ extension Model {
         private var repo: String
         private var number: Int
         
+        public private(set) var issue: DataObject.Issue?
+        public private(set) var comments: [DataObject.Comment] = []
+        
         init(user: String, repo: String, number: Int) {
             self.user = user
             self.repo = repo
             self.number = number
         }
         
-        
-        public private(set) var issue: DTO.Issue?
-        
         func refresh() -> DataRequest {
-            return Router.Repository
-                .issue(user: user, repo: repo, number: number)
-                .responseObject { (response: DataResponse<DTO.Issue>) in
+            return Router.issue(user: user, repo: repo, number: number)
+                .responseObject { (response: DataResponse<DataObject.Issue>) in
                     switch response.result {
                     case .success(let value):
                         self.issue = value
@@ -37,10 +36,22 @@ extension Model {
                 }
         }
         
+        func refreshComments() -> DataRequest {
+            return Router.comments(user: user, repo: repo, number: number)
+                .responseCollection { (response: DataResponse<[DataObject.Comment]>) in
+                    switch response.result {
+                    case .success(let value):
+                        self.comments = value
+                    case .failure(let error):
+                        debugPrint(error)
+                    }
+            }
+        }
         
         func comment(body: String) {
             
         }
+        
     }
     
 }
