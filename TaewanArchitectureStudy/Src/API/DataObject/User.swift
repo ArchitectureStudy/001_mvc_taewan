@@ -14,12 +14,13 @@ extension DataObject {
     public struct User: ResponseCollectionSerializable, ResponseObjectSerializable {
         let id: Int
         let login: String
-        let avatarURL: String
+        let avatarURL: URL?
         
         public init(json: JSON) {
             id = json["id"].intValue
             login = json["login"].stringValue
-            avatarURL = json["avatar_url"].stringValue
+            
+            avatarURL = URL(string: json["avatar_url"].stringValue)
         }
         
     }

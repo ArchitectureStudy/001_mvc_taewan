@@ -16,6 +16,7 @@ class IssueCell: NibDesignableCollectionViewCell {
     
     @IBOutlet weak var stateButton: UIButton!
     
+    @IBOutlet weak var commentButton: UIButton!
 }
 
 
@@ -27,5 +28,8 @@ extension IssueCell: DataObjectUpdatable {
         titleLabel.text = data.title
         subLabel.text = "#\(data.number) \(data.state.display) on \(createdAt) by \(data.user.login)"
         stateButton.isSelected = data.state == .close
+        
+        commentButton.isHidden = data.comments == 0
+        commentButton.setTitle("\(data.comments)", for: .normal)
     }
 }

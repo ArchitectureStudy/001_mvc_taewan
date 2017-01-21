@@ -19,6 +19,8 @@ public struct DataObject {
 
 public struct Model {
     /// API/Model/* 폴더에 만들어서 사용한다.
+
+    
 }
 
 
@@ -31,6 +33,15 @@ public protocol DataObjectUpdatable {
 }
 
 
-extension DataObjectUpdatable {
-    func update(data: DataObjectItemType, withImage: Bool = false) {}
+
+public protocol ModelLoadable: class {
+    func refresh() -> DataRequest
 }
+
+
+/// pagination 가능한 기능
+public protocol PaginationModelLoadable: ModelLoadable {
+    var page: Int { get }
+    func loadMore() -> DataRequest
+}
+

@@ -9,6 +9,7 @@ target 'TaewanArchitectureStudy' do
 #    pod 'RxCocoa', '~> 3.0'
     
 	pod 'Alamofire', '~> 4.2'
+    pod 'AlamofireImage', '~> 3.1'
 	pod 'NibDesignable', '~> 3.0'
 	pod 'Then'
     

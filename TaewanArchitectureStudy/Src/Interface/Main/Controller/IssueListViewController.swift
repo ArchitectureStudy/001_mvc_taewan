@@ -13,35 +13,57 @@ class IssueListViewController: UIViewController {
     
     @IBOutlet var collectionView: UICollectionView!
     
-    var model: Model.IssuesModel!
-    
-    fileprivate var estimateCell: IssueCell!
+    fileprivate var estimateCell: IssueCell = IssueCell()
     fileprivate var estimatedSizes: [IndexPath: CGSize] = [:]
+    
+    var presenter: IssueListPresenter?
+    
+    var config: Model.RepositoryConfig? {
+        didSet {
+            presenter = IssueListPresenter(config: config)
+            presenter?.delegate = self
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        refresh()
+        config = Model.RepositoryConfig(user: "ArchitectureStudy", repo: "study")
+        presenter?.refresh()
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        switch segue.destination {
+        case let controller as IssueDetailViewController:
+            guard let issue = sender as? DataObject.Issue else {
+                assertionFailure("issue data is null")
+                return
+            }
+            controller.title = "#\(issue.number)"
+            controller.config = Model.IssueConfig(repository: config, number: issue.number)
+            
+        default: break
+        }
+        
     }
 }
 
 
 // MARK: - Setup
 extension IssueListViewController {
+ 
     func setup() {
-        model = Model.IssuesModel(user: "JakeWharton", repo: "DiskLruCache")
-        estimateCell = IssueCell()
+        
     }
 }
 
 
 // MARK: - Network
-extension IssueListViewController {
-    
-    func refresh() {
-        model.refresh().response { _ in
-            self.collectionView.reloadData()
-        }
+extension IssueListViewController: IssueListPresenterDelegate {
+    func issueListDidLoaded() {
+        collectionView.reloadData()
     }
 }
 
@@ -49,13 +71,13 @@ extension IssueListViewController {
 extension IssueListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return model.list.count
+        return presenter?.model.datas.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "IssueCell", for: indexPath)
         
-        guard let data = model.list[safe: indexPath.row] else {
+        guard let data = presenter?.model.datas[safe: indexPath.row] else {
             return cell
         }
         
@@ -77,7 +99,7 @@ extension IssueListViewController: UICollectionViewDelegateFlowLayout {
             return estimatedSize
         }
         
-        if let data = model.list[safe: indexPath.row] {
+        if let data = presenter?.model.datas[safe: indexPath.row] {
             estimateCell.update(data: data)
         }
         
@@ -88,8 +110,7 @@ extension IssueListViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "Show", sender:  model.list[safe: indexPath.row])
+        self.performSegue(withIdentifier: "Show", sender:  presenter?.model.datas[safe: indexPath.row])
     }
     
 }
-

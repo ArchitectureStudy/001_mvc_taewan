@@ -10,27 +10,24 @@ import Foundation
 import Alamofire
 
 extension Model {
-    public class IssuesModel {
-        private var user: String
-        private var repo: String
-        private var page: Int = 1
+    public class IssuesModel: PaginationModelLoadable {
+        public private(set) var config: RepositoryConfig
+        public var page: Int = 1
         
-        public private(set) var list: [DataObject.Issue] = []
+        public private(set) var datas: [DataObject.Issue] = []
         
-        init(user: String, repo: String) {
-            self.user = user
-            self.repo = repo
+        init(config: RepositoryConfig) {
+            self.config = config
         }
         
-        func refresh() -> DataRequest {
+        @discardableResult
+        public func refresh() -> DataRequest {
             self.page = 1
-       
-            
-            return Router.issues(user: user, repo: repo, page: nil)
+            return Router.issues(user: config.user, repo: config.repo, page: nil)
                 .responseCollection { (response: DataResponse<[DataObject.Issue]>) in
                     switch response.result {
                     case .success(let value):
-                        self.list = value
+                        self.datas = value
                         self.page += 1
                     case .failure(let error):
                         debugPrint(error)
@@ -38,12 +35,13 @@ extension Model {
             }
         }
         
-        func loadMore() -> DataRequest {
-            return Router.issues(user: user, repo: repo, page: self.page)
+        @discardableResult
+        public func loadMore() -> DataRequest {
+            return Router.issues(user: config.user, repo: config.repo, page: self.page)
                 .responseCollection { (response: DataResponse<[DataObject.Issue]>) in
                     switch response.result {
                     case .success(let value):
-                        self.list += value
+                        self.datas += value
                         self.page += 1
                     case .failure(let error):
                         debugPrint(error)
@@ -54,3 +52,4 @@ extension Model {
     }
     
 }
+
