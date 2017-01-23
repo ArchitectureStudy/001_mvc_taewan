@@ -29,10 +29,7 @@ extension IssueCell: DataObjectUpdatable {
         subLabel.text = "#\(data.number) \(data.state.display) on \(createdAt) by \(data.user.login)"
         stateButton.isSelected = data.state == .close
         
-        if data.number == 30 {
-            print("--------------------")
-            print("----------\( data.comments)----------")
-        }
+     
         commentButton.isHidden = data.comments == 0
         commentButton.setTitle("\(data.comments)", for: .normal)
     }
