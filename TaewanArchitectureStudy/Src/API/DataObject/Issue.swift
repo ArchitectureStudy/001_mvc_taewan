@@ -54,3 +54,10 @@ extension DataObject.Issue {
         }
     }
 }
+
+
+extension DataObject.Issue: Equatable {
+    public static func ==(lhs: DataObject.Issue, rhs: DataObject.Issue) -> Bool {
+        return lhs.id == rhs.id
+    }
+}

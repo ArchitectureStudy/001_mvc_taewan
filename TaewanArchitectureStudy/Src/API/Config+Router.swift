@@ -39,3 +39,16 @@ extension Router {
         }
     }
 }
+
+
+extension Router.RepositoryConfig: Equatable {
+    public static func ==(lhs: Router.RepositoryConfig, rhs: Router.RepositoryConfig) -> Bool {
+        return lhs.user == rhs.user && lhs.repo == rhs.repo
+    }
+}
+
+extension Router.IssueConfig: Equatable {
+    public static func ==(lhs: Router.IssueConfig, rhs: Router.IssueConfig) -> Bool {
+        return lhs.repository == rhs.repository && lhs.number == rhs.number
+    }
+}

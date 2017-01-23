@@ -9,19 +9,22 @@
 import Foundation
 import Alamofire
 
-extension Notification.Name {
-    static let IssuesModelRefresh = Notification.Name("IssuesModelRefresh")
-}
 
 extension Model {
-    public class IssuesModel: PaginationModelLoadable {
-        public private(set) var config: Router.RepositoryConfig
+    public class IssuesModel: NSObject, PaginationModelLoadable {
+        public fileprivate(set) var config: Router.RepositoryConfig
         public var page: Int = 1
         
-        public private(set) var datas: [DataObject.Issue] = []
+        public fileprivate(set) var datas: [DataObject.Issue] = []
         
         init(config: Router.RepositoryConfig) {
             self.config = config
+            super.init()
+            addNotifications()
+        }
+        
+        deinit {
+            removeNotifications()
         }
         
         @discardableResult
@@ -59,3 +62,29 @@ extension Model {
     
 }
 
+
+extension Model.IssuesModel {
+    func addNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateIssueModel), name: .IssueModelRefresh, object: nil)
+    }
+    
+    func removeNotifications() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func updateIssueModel(_ notification: Notification) {
+        guard let model = notification.object as? Model.IssueModel,
+            let userInfo = notification.userInfo else { return }
+        //config 내용이 다르면 아무작업도 안합니당
+        guard let issue = userInfo[Notification.Key.IssuesModel] as? DataObject.Issue,
+            self.config == model.config.repository else { return }
+        let len = self.datas.count
+        for i in 0..<len {
+            if self.datas[i].id == issue.id {
+                self.datas[i] = issue
+                return
+            }
+        }
+    }
+
+}
