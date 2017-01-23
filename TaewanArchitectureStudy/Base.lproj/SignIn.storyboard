@@ -1,7 +1,107 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="cQV-Uy-CgY">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <scenes/>
+    <scenes>
+        <!--Sign In View Controller-->
+        <scene sceneID="1f9-um-n4U">
+            <objects>
+                <viewController id="cQV-Uy-CgY" customClass="SignInViewController" customModule="TaewanArchitectureStudy" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eHb-vp-OXP"/>
+                        <viewControllerLayoutGuide type="bottom" id="abB-fg-ftG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mW0-8A-sDz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="DgW-IN-R43">
+                                <rect key="frame" x="16" y="279" width="343" height="176"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="ArchitectureStudy" borderStyle="roundedRect" placeholder="account" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rJf-eh-uDo">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="study" borderStyle="roundedRect" placeholder="repository" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4UO-GI-Ak4">
+                                        <rect key="frame" x="0.0" y="42" width="343" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="token" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oco-7E-1Mb">
+                                        <rect key="frame" x="0.0" y="84" width="343" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kwy-zM-ihM">
+                                        <rect key="frame" x="0.0" y="126" width="343" height="50"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <inset key="contentEdgeInsets" minX="0.0" minY="16" maxX="0.0" maxY="16"/>
+                                        <state key="normal" title="Connect">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="W3w-hj-ODY" kind="show" identifier="" id="cE4-hI-HL1"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Github Issue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fwo-Jc-1St">
+                                <rect key="frame" x="112" y="153" width="152" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="30"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="fwo-Jc-1St" firstAttribute="centerX" secondItem="mW0-8A-sDz" secondAttribute="centerX" id="3A2-MX-gFP"/>
+                            <constraint firstItem="DgW-IN-R43" firstAttribute="top" secondItem="fwo-Jc-1St" secondAttribute="bottom" priority="100" constant="90" id="CGr-Li-PeJ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="DgW-IN-R43" secondAttribute="trailing" id="IEY-k0-Vjw"/>
+                            <constraint firstItem="DgW-IN-R43" firstAttribute="centerY" secondItem="mW0-8A-sDz" secondAttribute="centerY" multiplier="1.1" priority="750" id="Lyz-g8-UF4"/>
+                            <constraint firstItem="DgW-IN-R43" firstAttribute="centerX" secondItem="mW0-8A-sDz" secondAttribute="centerX" id="R7r-3Q-A0E"/>
+                            <constraint firstItem="fwo-Jc-1St" firstAttribute="top" relation="greaterThanOrEqual" secondItem="eHb-vp-OXP" secondAttribute="bottom" priority="900" constant="80" id="e1x-Gt-pc0"/>
+                            <constraint firstItem="abB-fg-ftG" firstAttribute="top" relation="greaterThanOrEqual" secondItem="DgW-IN-R43" secondAttribute="bottom" constant="8" symbolic="YES" id="fff-4c-ika"/>
+                            <constraint firstItem="DgW-IN-R43" firstAttribute="leading" secondItem="mW0-8A-sDz" secondAttribute="leadingMargin" id="oQz-rZ-rbh"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="s3f-sv-SzD" appends="YES" id="Szf-Io-a33"/>
+                        </connections>
+                    </view>
+                    <connections>
+                        <outlet property="repositoryTextField" destination="4UO-GI-Ak4" id="qBA-a4-Evk"/>
+                        <outlet property="signInBottomConstraint" destination="fff-4c-ika" id="Thv-fM-shR"/>
+                        <outlet property="tokenTextField" destination="oco-7E-1Mb" id="QAR-pg-4TS"/>
+                        <outlet property="userField" destination="rJf-eh-uDo" id="HgW-4V-6mD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X6V-ds-REb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="s3f-sv-SzD">
+                    <connections>
+                        <action selector="dismissKeyboardRecognizer:" destination="cQV-Uy-CgY" id="guF-Ou-JkN"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="111.99400299850076"/>
+        </scene>
+        <!--Main-->
+        <scene sceneID="xyb-hW-Nb3">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" id="W3w-hj-ODY" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e09-s0-vE7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="792" y="112"/>
+        </scene>
+    </scenes>
 </document>

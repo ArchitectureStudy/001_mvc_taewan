@@ -42,6 +42,32 @@ public enum Router {
 }
 
 
+extension Router {
+    static var accessToken: String? {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "accessToken")
+            UserDefaults.standard.synchronize()
+        }
+        get {
+            return UserDefaults.standard.string(forKey: "accessToken")
+        }
+    }
+
+    static fileprivate var _manager: Alamofire.SessionManager?
+    
+    static var manager: Alamofire.SessionManager {
+        if _manager == nil {
+            let configuration = URLSessionConfiguration.default
+            configuration.timeoutIntervalForRequest = 30 // seconds
+            configuration.timeoutIntervalForResource = 30
+            configuration.httpCookieStorage = HTTPCookieStorage.shared
+            _manager = Alamofire.SessionManager(configuration: configuration)
+        }
+        return _manager!
+    }
+    
+}
+
 extension Router: URLRequestConvertible {
     /// - Returns: URLRequest
     /// - Throws: AFError(Alamofire Error)
@@ -60,6 +86,11 @@ extension Router: URLRequestConvertible {
                 request = try URLEncoding.default.encode(request, with: parameters)
             }
         }
+        
+        if let accessToken = Router.accessToken {
+            request.setValue("token \(accessToken)", forHTTPHeaderField: "Authorization")
+        }
+        
         return request
     }
     
