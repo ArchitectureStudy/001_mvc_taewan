@@ -9,14 +9,14 @@
 import Foundation
 
 
-protocol IssueDetailPresenterDelegate {
+protocol IssueDetailPresenterDelegate: class {
     func issueDidLoaded()
     func createdComment()
 }
 
 
 class IssueDetailPresenter: NSObject {
-    var delegate: IssueDetailPresenterDelegate?
+    weak var delegate: IssueDetailPresenterDelegate?
     let model: Model.IssueModel
     
     init?(config: Router.IssueConfig?) {

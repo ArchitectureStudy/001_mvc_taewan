@@ -9,13 +9,13 @@
 import Foundation
 
 
-protocol IssueListPresenterDelegate {
+protocol IssueListPresenterDelegate: class {
     func issueListDidLoaded()
 }
 
 
 class IssueListPresenter: NSObject {
-    var delegate: IssueListPresenterDelegate?
+    weak var delegate: IssueListPresenterDelegate?
     let model: Model.IssuesModel
     
     
