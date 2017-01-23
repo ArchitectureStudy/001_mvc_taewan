@@ -62,6 +62,8 @@ extension IssueDetailViewController: IssueDetailPresenterDelegate {
         
         if let data = presenter?.model.data {
             headerView.update(data: data)
+            collectionView.updateOffsetHeader()
+            refreshControl.bounds.origin.y = headerView.bounds.height
         }
         
         collectionView.reloadData()
