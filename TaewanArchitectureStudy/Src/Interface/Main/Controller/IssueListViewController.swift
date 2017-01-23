@@ -16,6 +16,8 @@ class IssueListViewController: UIViewController {
     fileprivate var estimateCell: IssueCell = IssueCell()
     fileprivate var estimatedSizes: [IndexPath: CGSize] = [:]
     
+    let refreshControl = UIRefreshControl()
+    
     var presenter: IssueListPresenter?
     
     var config: Model.RepositoryConfig? {
@@ -25,44 +27,40 @@ class IssueListViewController: UIViewController {
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setup()
-        config = Model.RepositoryConfig(user: "ArchitectureStudy", repo: "study")
-        presenter?.refresh()
+    @IBAction func didTapCreateIssue(_ sender: Any) {
+        let alert = UIAlertController(title: "는 훼이크", message: "힇 속았지?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "닫기", style: .default, handler: { _ in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
-        switch segue.destination {
-        case let controller as IssueDetailViewController:
-            guard let issue = sender as? DataObject.Issue else {
-                assertionFailure("issue data is null")
-                return
-            }
-            controller.title = "#\(issue.number)"
-            controller.config = Model.IssueConfig(repository: config, number: issue.number)
-            
-        default: break
-        }
-        
-    }
 }
 
 
 // MARK: - Setup
 extension IssueListViewController {
- 
+    
     func setup() {
-        
+        collectionView.addSubview(refreshControl)
+        collectionView.alwaysBounceVertical = true
+    }
+    
+    func eventSetup() {
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+    }
+    
+    func refresh(sender: Any) {
+        print("refresh:\(sender)")
+        presenter?.refresh()
     }
 }
 
 
-// MARK: - Network
+// MARK: - PresenterDelegate
 extension IssueListViewController: IssueListPresenterDelegate {
     func issueListDidLoaded() {
+        refreshControl.endRefreshing()
         collectionView.reloadData()
     }
 }
@@ -113,4 +111,31 @@ extension IssueListViewController: UICollectionViewDelegateFlowLayout {
         self.performSegue(withIdentifier: "Show", sender:  presenter?.model.datas[safe: indexPath.row])
     }
     
+}
+
+
+// MARK: - override
+extension IssueListViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setup()
+        eventSetup()
+        refresh(sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        switch segue.destination {
+        case let controller as IssueDetailViewController:
+            guard let issue = sender as? DataObject.Issue else {
+                assertionFailure("issue data is null")
+                return
+            }
+            controller.title = "#\(issue.number)"
+            controller.config = Model.IssueConfig(repository: config, number: issue.number)
+            
+        default: break
+        }
+        
+    }
 }

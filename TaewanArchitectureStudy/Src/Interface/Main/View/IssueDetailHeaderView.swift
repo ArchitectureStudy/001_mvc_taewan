@@ -45,8 +45,9 @@ extension IssueDetailHeaderView {
         commentContainerView.layer.cornerRadius = 2
         commentContainerView.layer.borderColor = commentContainerView.backgroundColor?.cgColor
         commentContainerView.layer.borderWidth = 1
-//        commentContainerView.layer.bor
     }
+    
+ 
 }
 
 extension IssueDetailHeaderView: DataObjectUpdatable {
@@ -66,3 +67,4 @@ extension IssueDetailHeaderView: DataObjectUpdatable {
     }
     
 }
+

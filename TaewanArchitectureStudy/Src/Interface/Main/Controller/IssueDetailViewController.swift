@@ -16,8 +16,12 @@ class IssueDetailViewController: UIViewController {
     @IBOutlet var headerView: IssueDetailHeaderView!
     @IBOutlet weak var collectionView: HDCollectionView!
     
+    @IBOutlet weak var commentBottomConstraint: NSLayoutConstraint!
+    
     fileprivate var estimateCell: IssueCommentCell = IssueCommentCell()
     fileprivate var estimatedSizes: [IndexPath: CGSize] = [:]
+    
+    let refreshControl = UIRefreshControl()
     
     var presenter: IssueDetailPresenter?
     
@@ -31,8 +35,8 @@ class IssueDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        presenter?.refresh()
-        
+        eventSetup()
+        refresh(sender: self)
     }
     
     
@@ -41,6 +45,8 @@ class IssueDetailViewController: UIViewController {
 extension IssueDetailViewController: IssueDetailPresenterDelegate {
     
     func issueDidLoaded() {
+        refreshControl.endRefreshing()
+        
         if let data = presenter?.model.data {
             headerView.update(data: data)
 //            collectionView.up
@@ -64,8 +70,21 @@ extension IssueDetailViewController  {
         collectionView.headerView = self.headerView
         collectionView.alwaysBounceVertical = true
         collectionView.alpha = 0
-      
+
+        collectionView.addSubview(refreshControl)
+        refreshControl.bounds.origin.y = headerView.bounds.height
+    }
+    
+    func eventSetup() {
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(onChangedKeyboard), name: .UIKeyboardWillChangeFrame, object: nil)
+    }
+
+    
+    func refresh(sender: Any) {
+        print("refresh:\(sender)")
+        presenter?.refresh()
     }
 }
 
@@ -112,4 +131,24 @@ extension IssueDetailViewController: UICollectionViewDelegateFlowLayout {
         return estimatedSize
     }
 
+}
+
+
+
+// MARK: - Notification selectors
+extension IssueDetailViewController {
+    
+    func onChangedKeyboard(_ notification: Notification) {
+        guard let userInfo = notification.userInfo,
+            let keyboardInfo = KeyboardInfo(userInfo) else {
+            return
+        }
+        let hidden = keyboardInfo.endFrame.origin.y >= UIScreen.main.bounds.size.height
+        UIView.animate(withDuration: keyboardInfo.duration, delay: 0, options: keyboardInfo.animationOptions, animations: {
+            self.commentBottomConstraint.constant = hidden ? 0 : keyboardInfo.endFrame.size.height
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+        
+    }
+    
 }
