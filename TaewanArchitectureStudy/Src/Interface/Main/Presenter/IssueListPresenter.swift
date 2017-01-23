@@ -19,13 +19,11 @@ class IssueListPresenter: NSObject {
     let model: Model.IssuesModel
     
     
-    
-    init?(config: Model.RepositoryConfig?) {
+    init?(config: Router.RepositoryConfig?) {
         guard let repository = config else { return nil }
         self.model = Model.IssuesModel(config: repository)
         super.init()
     }
-    
 
     func refresh() {
         model.refresh().response { [weak self] _ in

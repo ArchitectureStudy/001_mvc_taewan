@@ -24,12 +24,13 @@ extension Model {
             self.issueModel = issueModel
         }
         
+        @discardableResult
         public func refresh() -> DataRequest {
             self.page = 1
             let config = issueModel.config
             
-            return Router.comments(user: config.repository.user, repo: config.repository.repo, number: config.number)
-                .responseCollection { (response: DataResponse<[DataObject.Comment]>) in
+            return Router.comments(config: config, page: page)
+                .responseCollection { [unowned self] (response: DataResponse<[DataObject.Comment]>) in
                     switch response.result {
                     case .success(let value):
                         self.datas = value
@@ -37,6 +38,21 @@ extension Model {
                     case .failure(let error):
                         debugPrint(error)
                     }
+            }
+        }
+        
+        @discardableResult
+        public func create(body: String) -> DataRequest {
+            let config = issueModel.config
+            return Router.createComment(config: config, body: body)
+                .responseObject { [unowned self] (response: DataResponse<DataObject.Comment>) in
+                    switch response.result {
+                    case .success(let value):
+                        self.datas.append(value)
+                    case .failure(let error):
+                        debugPrint(error)
+                    }
+                    
             }
         }
         

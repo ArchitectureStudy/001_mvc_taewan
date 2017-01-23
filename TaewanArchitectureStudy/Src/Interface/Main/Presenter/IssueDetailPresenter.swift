@@ -11,6 +11,7 @@ import Foundation
 
 protocol IssueDetailPresenterDelegate {
     func issueDidLoaded()
+    func createdComment()
 }
 
 
@@ -18,16 +19,25 @@ class IssueDetailPresenter: NSObject {
     var delegate: IssueDetailPresenterDelegate?
     let model: Model.IssueModel
     
-    init?(config: Model.IssueConfig?) {
+    init?(config: Router.IssueConfig?) {
         guard let issue = config else { return nil }
         self.model = Model.IssueModel(config: issue)
         super.init()
     }
     
-    func refresh() {
+    func refresh(withComment: Bool = true) {
         model.refresh().response { [weak self] _ in
             self?.delegate?.issueDidLoaded()
-            self?.refreshComments()
+            if withComment {
+                self?.refreshComments()
+            }
+        }
+    }
+    
+    func create(comment: String) {
+        model.comments.create(body: comment).response { [weak self] _ in
+            self?.delegate?.createdComment()
+            self?.refresh(withComment: false)
         }
     }
     

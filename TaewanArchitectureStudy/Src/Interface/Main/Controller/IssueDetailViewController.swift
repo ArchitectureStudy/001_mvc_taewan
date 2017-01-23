@@ -16,6 +16,9 @@ class IssueDetailViewController: UIViewController {
     @IBOutlet var headerView: IssueDetailHeaderView!
     @IBOutlet weak var collectionView: HDCollectionView!
     
+    @IBOutlet weak var commentTextView: UITextView!
+    @IBOutlet weak var commentButton: UIButton!
+    
     @IBOutlet weak var commentBottomConstraint: NSLayoutConstraint!
     
     fileprivate var estimateCell: IssueCommentCell = IssueCommentCell()
@@ -25,31 +28,40 @@ class IssueDetailViewController: UIViewController {
     
     var presenter: IssueDetailPresenter?
     
-    var config: Model.IssueConfig? {
+    var config: Router.IssueConfig? {
         didSet {
             presenter = IssueDetailPresenter(config: config)
             presenter?.delegate = self
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setup()
-        eventSetup()
-        refresh(sender: self)
+    @IBAction func didTapCreateComment(_ sender: Any) {
+        guard let body = commentTextView.text, !body.isEmpty else { return }
+        presenter?.create(comment: body)
+        commentButton.isEnabled = false
+        commentTextView.text = nil
     }
-    
-    
 }
 
 extension IssueDetailViewController: IssueDetailPresenterDelegate {
+    func createdComment() {
+        commentButton.isEnabled = true
+        collectionView.reloadData()
+        
+        collectionView.collectionViewLayout.invalidateLayout()
+        collectionView.collectionViewLayout.prepare()
+        DispatchQueue.main.async {
+            let contentSize =  self.collectionView.contentSize
+            let rect = CGRect(x: contentSize.width - 1, y: contentSize.height - 1, width: 1, height: 1)
+            self.collectionView.scrollRectToVisible(rect, animated: true)
+        }
+    }
     
     func issueDidLoaded() {
         refreshControl.endRefreshing()
         
         if let data = presenter?.model.data {
             headerView.update(data: data)
-//            collectionView.up
         }
         
         collectionView.reloadData()
@@ -60,6 +72,7 @@ extension IssueDetailViewController: IssueDetailPresenterDelegate {
             }
         }
     }
+    
 }
 
 
@@ -70,7 +83,7 @@ extension IssueDetailViewController  {
         collectionView.headerView = self.headerView
         collectionView.alwaysBounceVertical = true
         collectionView.alpha = 0
-
+        
         collectionView.addSubview(refreshControl)
         refreshControl.bounds.origin.y = headerView.bounds.height
     }
@@ -80,17 +93,15 @@ extension IssueDetailViewController  {
         
         NotificationCenter.default.addObserver(self, selector: #selector(onChangedKeyboard), name: .UIKeyboardWillChangeFrame, object: nil)
     }
-
     
     func refresh(sender: Any) {
-        print("refresh:\(sender)")
         presenter?.refresh()
     }
 }
 
 
 extension IssueDetailViewController: UICollectionViewDataSource {
-
+    
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommentCell", for: indexPath)
         
@@ -104,7 +115,7 @@ extension IssueDetailViewController: UICollectionViewDataSource {
         
         return cell
     }
-
+    
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return presenter?.model.comments.datas.count ?? 0
     }
@@ -130,7 +141,6 @@ extension IssueDetailViewController: UICollectionViewDelegateFlowLayout {
         
         return estimatedSize
     }
-
 }
 
 
@@ -141,7 +151,7 @@ extension IssueDetailViewController {
     func onChangedKeyboard(_ notification: Notification) {
         guard let userInfo = notification.userInfo,
             let keyboardInfo = KeyboardInfo(userInfo) else {
-            return
+                return
         }
         let hidden = keyboardInfo.endFrame.origin.y >= UIScreen.main.bounds.size.height
         UIView.animate(withDuration: keyboardInfo.duration, delay: 0, options: keyboardInfo.animationOptions, animations: {
@@ -151,4 +161,16 @@ extension IssueDetailViewController {
         
     }
     
+}
+
+
+
+// MARK: - override
+extension IssueDetailViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setup()
+        eventSetup()
+        refresh(sender: self)
+    }
 }

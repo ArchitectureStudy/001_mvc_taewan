@@ -11,7 +11,7 @@
 
 import Foundation
 
-extension Model {
+extension Router {
     public struct RepositoryConfig {
         public let user: String
         public let repo: String

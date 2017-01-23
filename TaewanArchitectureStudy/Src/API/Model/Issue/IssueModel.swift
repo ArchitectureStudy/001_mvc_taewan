@@ -11,7 +11,7 @@ import Alamofire
 
 extension Model {
     public class IssueModel: ModelLoadable {
-        public private(set) var config: IssueConfig
+        public private(set) var config: Router.IssueConfig
         
         public private(set) var data: DataObject.Issue?
         
@@ -19,13 +19,14 @@ extension Model {
             return CommentsModel(issueModel: self)
         }()
         
-        init(config: IssueConfig) {
+        init(config: Router.IssueConfig) {
             self.config = config
         }
         
         public func refresh() -> DataRequest {
-            return Router.issue(user: config.repository.user, repo: config.repository.repo, number: config.number)
-                .responseObject { (response: DataResponse<DataObject.Issue>) in
+            
+            return Router.issue(config: config)
+                .responseObject { [unowned self] (response: DataResponse<DataObject.Issue>) in
                     switch response.result {
                     case .success(let value):
                         self.data = value

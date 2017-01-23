@@ -15,7 +15,6 @@
 		121FE0021E22174100CE18E8 /* IssueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121FE0001E22174100CE18E8 /* IssueCell.swift */; };
 		121FE0031E22174100CE18E8 /* IssueCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 121FE0011E22174100CE18E8 /* IssueCell.xib */; };
 		125809861E332D4000C9017B /* IssueDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125809851E332D4000C9017B /* IssueDetailPresenter.swift */; };
-		125809881E332EAF00C9017B /* Config+Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125809871E332EAF00C9017B /* Config+Model.swift */; };
 		125809911E33396400C9017B /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1258098F1E33396400C9017B /* UIColor+Extension.swift */; };
 		126402601E334A0300853C4C /* LayoutMarginLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1264025F1E334A0300853C4C /* LayoutMarginLabel.swift */; };
 		126402631E334D5300853C4C /* IssueDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126402621E334D5300853C4C /* IssueDetailHeaderView.swift */; };
@@ -36,6 +35,7 @@
 		3247F1BE1E1F257800B5CD73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3247F1BC1E1F257800B5CD73 /* Main.storyboard */; };
 		3247F1C01E1F257800B5CD73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3247F1BF1E1F257800B5CD73 /* Assets.xcassets */; };
 		3247F1C31E1F257800B5CD73 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3247F1C11E1F257800B5CD73 /* LaunchScreen.storyboard */; };
+		324890321E35A905002408D7 /* Config+Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324890311E35A905002408D7 /* Config+Router.swift */; };
 		32A3094C1E2351DB00A370A4 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A3094B1E2351DB00A370A4 /* Date+Extension.swift */; };
 		C294DC199F5C24F606EFD5E1 /* Pods_TaewanArchitectureStudy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F17CB31F08348AACA627CAD4 /* Pods_TaewanArchitectureStudy.framework */; };
 		E575CDB559F5FF7A163AD431 /* DataRequest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E575C926E331F289357B4266 /* DataRequest+Extension.swift */; };
@@ -51,7 +51,6 @@
 		121FE0001E22174100CE18E8 /* IssueCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueCell.swift; sourceTree = "<group>"; };
 		121FE0011E22174100CE18E8 /* IssueCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IssueCell.xib; sourceTree = "<group>"; };
 		125809851E332D4000C9017B /* IssueDetailPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueDetailPresenter.swift; sourceTree = "<group>"; };
-		125809871E332EAF00C9017B /* Config+Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Config+Model.swift"; sourceTree = "<group>"; };
 		1258098F1E33396400C9017B /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		1264025F1E334A0300853C4C /* LayoutMarginLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutMarginLabel.swift; sourceTree = "<group>"; };
 		126402621E334D5300853C4C /* IssueDetailHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueDetailHeaderView.swift; sourceTree = "<group>"; };
@@ -75,6 +74,7 @@
 		3247F1BF1E1F257800B5CD73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3247F1C21E1F257800B5CD73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3247F1C41E1F257800B5CD73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		324890311E35A905002408D7 /* Config+Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Config+Router.swift"; sourceTree = "<group>"; };
 		32A3094B1E2351DB00A370A4 /* Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		870AE74D5D3CC42486E023EA /* Pods-TaewanArchitectureStudy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaewanArchitectureStudy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TaewanArchitectureStudy/Pods-TaewanArchitectureStudy.debug.xcconfig"; sourceTree = "<group>"; };
 		E575C0E998C061C6EA0AB106 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -106,7 +106,6 @@
 		1217EFAC1E3322D000594216 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				125809871E332EAF00C9017B /* Config+Model.swift */,
 				1217EFAD1E3322D000594216 /* Comment */,
 				1217EFAF1E3322D000594216 /* Issue */,
 			);
@@ -313,6 +312,7 @@
 		E575CD184D63AF3497DDD56D /* API */ = {
 			isa = PBXGroup;
 			children = (
+				324890311E35A905002408D7 /* Config+Router.swift */,
 				12C5302D1E330C5F0072FAD1 /* Router.swift */,
 				E575C0E998C061C6EA0AB106 /* API.swift */,
 				1217EFAC1E3322D000594216 /* Model */,
@@ -423,7 +423,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		DA882B03FCBFA11D7B4412A4 /* [CP] Copy Pods Resources */ = {
@@ -452,6 +452,7 @@
 				12B42BF71E22281400E1711E /* Collection+Extension.swift in Sources */,
 				3247F1B91E1F257800B5CD73 /* AppDelegate.swift in Sources */,
 				125809861E332D4000C9017B /* IssueDetailPresenter.swift in Sources */,
+				324890321E35A905002408D7 /* Config+Router.swift in Sources */,
 				1217EFB31E3322D000594216 /* IssueModel.swift in Sources */,
 				E575CDB559F5FF7A163AD431 /* DataRequest+Extension.swift in Sources */,
 				3211F3701E2CB9E800BE6B32 /* IssueDetailViewController.swift in Sources */,
@@ -470,7 +471,6 @@
 				3211F36A1E2CB80800BE6B32 /* HDCollectionView.swift in Sources */,
 				3211F3731E2CBACC00BE6B32 /* IssueCommentCell.swift in Sources */,
 				1217EFB41E3322D000594216 /* IssuesModel.swift in Sources */,
-				125809881E332EAF00C9017B /* Config+Model.swift in Sources */,
 				12C530361E3318120072FAD1 /* Issue.swift in Sources */,
 				1217EFA91E331CC200594216 /* IssueListPresenter.swift in Sources */,
 				126FEBA01E35049A0075D9EF /* KeyboardInfo.swift in Sources */,

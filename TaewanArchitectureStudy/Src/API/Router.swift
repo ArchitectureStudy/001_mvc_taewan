@@ -13,13 +13,16 @@ import SwiftyJSON
 fileprivate let baseURLString: String = "https://api.github.com"
 
 public enum Router {
-    case issues(user: String, repo: String, page: Int?)
-    case issue(user: String, repo: String, number: Int)
-    case comments(user: String, repo: String, number: Int)
+    case issues(config: RepositoryConfig, page: Int?)
+    case issue(config: IssueConfig)
+    case comments(config: IssueConfig, page: Int?)
     
+    case createComment(config: IssueConfig, body: String)
     
     var method: Alamofire.HTTPMethod {
         switch self {
+        case .createComment:
+            return .post
         default:
             return .get
         }
@@ -27,19 +30,31 @@ public enum Router {
     
     var result: (path: String, parameters: [String: Any]?)  {
         switch self {
-        case .issues(let user, let repo, let page):
+        case .issues(let config, let page):
             var parameters: [String: Any] = [:]
             if let page = page {
                 parameters["page"] = page
             }
-            return (path: "repos/\(user)/\(repo)/issues", parameters: parameters)
-        case .issue(let user, let repo, let number):
-            return (path: "repos/\(user)/\(repo)/issues/\(number)", parameters: nil)
-        case .comments(let user, let repo, let number):
-            return (path: "repos/\(user)/\(repo)/issues/\(number)/comments", parameters: nil)
+            return (path: "repos/\(config.user)/\(config.repo)/issues", parameters: parameters)
+        case .issue(let config):
+            let repository = config.repository
+            return (path: "repos/\(repository.user)/\(repository.repo)/issues/\(config.number)", parameters: nil)
+        case .comments(let config, let page):
+            let repository = config.repository
+            var parameters: [String: Any] = [:]
+            if let page = page {
+                parameters["page"] = page
+            }
+            return (path: "repos/\(repository.user)/\(repository.repo)/issues/\(config.number)/comments", parameters: parameters)
+            
+        case .createComment(let config, let body):
+            let repository = config.repository
+            return (path: "repos/\(repository.user)/\(repository.repo)/issues/\(config.number)/comments", parameters: ["body": body])
         }
-    }    
+    }
 }
+
+
 
 
 extension Router {
@@ -52,7 +67,7 @@ extension Router {
             return UserDefaults.standard.string(forKey: "accessToken")
         }
     }
-
+    
     static fileprivate var _manager: Alamofire.SessionManager?
     
     static var manager: Alamofire.SessionManager {
@@ -61,12 +76,14 @@ extension Router {
             configuration.timeoutIntervalForRequest = 30 // seconds
             configuration.timeoutIntervalForResource = 30
             configuration.httpCookieStorage = HTTPCookieStorage.shared
+            configuration.urlCache = URLCache(memoryCapacity: 0, diskCapacity: 0, diskPath: nil)
             _manager = Alamofire.SessionManager(configuration: configuration)
         }
         return _manager!
     }
-    
 }
+
+
 
 extension Router: URLRequestConvertible {
     /// - Returns: URLRequest
@@ -95,15 +112,15 @@ extension Router: URLRequestConvertible {
     }
     
     public func responseSwiftyJSON(_ completionHandler: @escaping (DataResponse<JSON>) -> Void) -> DataRequest {
-        return Alamofire.request(self).responseSwiftyJSON(completionHandler)
+        return Router.manager.request(self).responseSwiftyJSON(completionHandler)
     }
     
     public func responseObject<T: ResponseObjectSerializable>(_ completionHandler: @escaping (DataResponse<T>) -> Void) -> DataRequest {
-        return Alamofire.request(self).responseObject(completionHandler)
+        return Router.manager.request(self).responseObject(completionHandler)
     }
     
     public func responseCollection<T: ResponseObjectSerializable>(_ completionHandler: @escaping (DataResponse<[T]>) -> Void) -> DataRequest {
-        return Alamofire.request(self).responseCollection(completionHandler)
+        return Router.manager.request(self).responseCollection(completionHandler)
     }
     
 }

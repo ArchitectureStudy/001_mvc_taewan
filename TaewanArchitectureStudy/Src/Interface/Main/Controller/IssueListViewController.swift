@@ -20,7 +20,7 @@ class IssueListViewController: UIViewController {
     
     var presenter: IssueListPresenter?
     
-    var config: Model.RepositoryConfig? {
+    var config: Router.RepositoryConfig? {
         didSet {
             presenter = IssueListPresenter(config: config)
             presenter?.delegate = self
@@ -132,7 +132,7 @@ extension IssueListViewController {
                 return
             }
             controller.title = "#\(issue.number)"
-            controller.config = Model.IssueConfig(repository: config, number: issue.number)
+            controller.config = Router.IssueConfig(repository: config, number: issue.number)
             
         default: break
         }
