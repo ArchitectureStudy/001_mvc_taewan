@@ -9,6 +9,9 @@
 import UIKit
 import AlamofireImage
 
+fileprivate extension TimeInterval {
+    static let basic: TimeInterval = 0.4
+}
 
 class IssueDetailViewController: UIViewController {
     
@@ -69,7 +72,7 @@ extension IssueDetailViewController: IssueDetailPresenterDelegate {
         collectionView.reloadData()
         
         if collectionView.alpha == 0 {
-            UIView.animate(withDuration: 0.4) {
+            UIView.animate(withDuration: .basic) {
                 self.collectionView.alpha = 1
             }
         }

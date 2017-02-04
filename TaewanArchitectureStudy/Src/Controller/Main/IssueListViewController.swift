@@ -11,6 +11,7 @@ import Alamofire
 
 class IssueListViewController: UIViewController {
     
+    
     @IBOutlet var collectionView: UICollectionView!
     
     fileprivate var estimateCell: IssueCell = IssueCell()
@@ -60,6 +61,7 @@ extension IssueListViewController {
 // MARK: - PresenterDelegate
 extension IssueListViewController: IssueListPresenterDelegate {
     func issueListDidLoaded() {
+        estimatedSizes = [:]
         refreshControl.endRefreshing()
         collectionView.reloadData()
     }

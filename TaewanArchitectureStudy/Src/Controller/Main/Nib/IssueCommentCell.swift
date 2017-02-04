@@ -11,6 +11,12 @@ import NibDesignable
 
 class IssueCommentCell: NibDesignableCollectionViewCell {
 
+//    @IBInspectable var image: UIImage? {
+//        didSet {
+//         avatarImageView.image = image
+//        }
+//    }
+    
     @IBOutlet weak var avatarImageView: UIImageView!
     
     @IBOutlet weak var commentContainerView: UIView!
