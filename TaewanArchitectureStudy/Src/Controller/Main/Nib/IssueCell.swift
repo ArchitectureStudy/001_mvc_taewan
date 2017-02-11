@@ -9,28 +9,28 @@
 import UIKit
 import NibDesignable
 
-class IssueCell: NibDesignableCollectionViewCell {
-    
+class IssueCell: NibDesignableCollectionViewCell, LayoutEistimatable {
+    static var eistimatedLayout: [IndexPath: CGSize] = [:]
+  
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subLabel: UILabel!
-    
     @IBOutlet weak var stateButton: UIButton!
-    
     @IBOutlet weak var commentButton: UIButton!
+    
+    
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        return self.eistimateLayoutAttributes(layoutAttributes)
+    }
 }
 
-
-extension IssueCell: DataObjectUpdatable {
-
-    func update(data: DataObject.Issue, withImage: Bool = false) {
-        let createdAt = data.createdAt?.string(dateFormat: "DD MMM yyyy") ?? "-"
-        
-        titleLabel.text = data.title
-        subLabel.text = "#\(data.number) \(data.state.display) on \(createdAt) by \(data.user.login)"
-        stateButton.isSelected = data.state == .close
-        
-     
-        commentButton.isHidden = data.comments == 0
-        commentButton.setTitle("\(data.comments)", for: .normal)
+extension IssueCell: Configurable {
+    
+    func configure(_ viewModel: IssueCellViewModel?) {
+        guard let viewModel = viewModel else { return }
+        titleLabel.text = viewModel.title
+        subLabel.text = viewModel.subLabel
+        stateButton.isSelected = !viewModel.isOpened
+        commentButton.isHidden = viewModel.isCommentHidden
+        commentButton.setTitle(viewModel.comments, for: .normal)
     }
 }

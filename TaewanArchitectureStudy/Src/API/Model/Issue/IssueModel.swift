@@ -88,6 +88,7 @@ extension Model.IssueModel {
         NotificationCenter.default.addObserver(self, selector: #selector(updateIssueModel), name: .IssueModelRefresh, object: nil)//object 에서 무슨일을 하는지 알려주세요!
     }
     
+    
     func removeNotifications() {
         NotificationCenter.default.removeObserver(self)
     }

@@ -15,7 +15,6 @@ fileprivate extension TimeInterval {
 
 class IssueDetailViewController: UIViewController {
     
-    
     @IBOutlet var headerView: IssueDetailHeaderView!
     @IBOutlet weak var collectionView: HDCollectionView!
     

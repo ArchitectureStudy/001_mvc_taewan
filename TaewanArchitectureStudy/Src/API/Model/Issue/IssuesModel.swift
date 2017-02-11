@@ -35,7 +35,6 @@ extension Model {
                 .responseCollection { [unowned self] (response: DataResponse<[DataObject.Issue]>) in
                     switch response.result {
                     case .success(let value):
-                        print(value)
                         self.datas = value
                         self.page += 1
                     case .failure(let error):

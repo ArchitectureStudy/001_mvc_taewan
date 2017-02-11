@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		124537E91E4EF57500EE4078 /* IssueListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124537E81E4EF57500EE4078 /* IssueListViewModel.swift */; };
+		124537EB1E4EF8CA00EE4078 /* IssueCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124537EA1E4EF8CA00EE4078 /* IssueCellViewModel.swift */; };
+		124537ED1E4EF93400EE4078 /* Configurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124537EC1E4EF93400EE4078 /* Configurable.swift */; };
+		124537EF1E4F04B300EE4078 /* LayoutAttributable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124537EE1E4F04B300EE4078 /* LayoutAttributable.swift */; };
 		126FEBA31E357DD80075D9EF /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 126FEBA11E357DD80075D9EF /* SignIn.storyboard */; };
 		12EB83F91E45A06A00E5698A /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EB83C91E45A06A00E5698A /* API.swift */; };
 		12EB83FA1E45A06A00E5698A /* Config+Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EB83CA1E45A06A00E5698A /* Config+Router.swift */; };
@@ -24,7 +28,6 @@
 		12EB84061E45A06A00E5698A /* KeyboardInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EB83E01E45A06A00E5698A /* KeyboardInfo.swift */; };
 		12EB84071E45A06A00E5698A /* HDCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EB83E21E45A06A00E5698A /* HDCollectionView.swift */; };
 		12EB84081E45A06A00E5698A /* LayoutMarginLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EB83E31E45A06A00E5698A /* LayoutMarginLabel.swift */; };
-		12EB84091E45A06A00E5698A /* MaxFixedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EB83E41E45A06A00E5698A /* MaxFixedTextView.swift */; };
 		12EB840A1E45A06A00E5698A /* IssueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EB83E71E45A06A00E5698A /* IssueDetailViewController.swift */; };
 		12EB840B1E45A06A00E5698A /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EB83E81E45A06A00E5698A /* IssueListViewController.swift */; };
 		12EB840C1E45A06A00E5698A /* IssueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EB83EA1E45A06A00E5698A /* IssueCell.swift */; };
@@ -43,6 +46,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		124537E81E4EF57500EE4078 /* IssueListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueListViewModel.swift; sourceTree = "<group>"; };
+		124537EA1E4EF8CA00EE4078 /* IssueCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueCellViewModel.swift; sourceTree = "<group>"; };
+		124537EC1E4EF93400EE4078 /* Configurable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configurable.swift; sourceTree = "<group>"; };
+		124537EE1E4F04B300EE4078 /* LayoutAttributable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutAttributable.swift; sourceTree = "<group>"; };
 		126FEBA21E357DD80075D9EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SignIn.storyboard; sourceTree = "<group>"; };
 		12EB83C91E45A06A00E5698A /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		12EB83CA1E45A06A00E5698A /* Config+Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Config+Router.swift"; sourceTree = "<group>"; };
@@ -60,7 +67,6 @@
 		12EB83E01E45A06A00E5698A /* KeyboardInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardInfo.swift; sourceTree = "<group>"; };
 		12EB83E21E45A06A00E5698A /* HDCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HDCollectionView.swift; sourceTree = "<group>"; };
 		12EB83E31E45A06A00E5698A /* LayoutMarginLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutMarginLabel.swift; sourceTree = "<group>"; };
-		12EB83E41E45A06A00E5698A /* MaxFixedTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaxFixedTextView.swift; sourceTree = "<group>"; };
 		12EB83E71E45A06A00E5698A /* IssueDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueDetailViewController.swift; sourceTree = "<group>"; };
 		12EB83E81E45A06A00E5698A /* IssueListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueListViewController.swift; sourceTree = "<group>"; };
 		12EB83EA1E45A06A00E5698A /* IssueCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueCell.swift; sourceTree = "<group>"; };
@@ -108,10 +114,10 @@
 		12EB83C81E45A06A00E5698A /* API */ = {
 			isa = PBXGroup;
 			children = (
+				12EB83CF1E45A06A00E5698A /* Model */,
+				12EB83CB1E45A06A00E5698A /* DataObject */,
 				12EB83C91E45A06A00E5698A /* API.swift */,
 				12EB83CA1E45A06A00E5698A /* Config+Router.swift */,
-				12EB83CB1E45A06A00E5698A /* DataObject */,
-				12EB83CF1E45A06A00E5698A /* Model */,
 				12EB83D51E45A06A00E5698A /* Router.swift */,
 			);
 			path = API;
@@ -202,6 +208,8 @@
 			isa = PBXGroup;
 			children = (
 				12EB83E01E45A06A00E5698A /* KeyboardInfo.swift */,
+				124537EC1E4EF93400EE4078 /* Configurable.swift */,
+				124537EE1E4F04B300EE4078 /* LayoutAttributable.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -211,7 +219,6 @@
 			children = (
 				12EB83E21E45A06A00E5698A /* HDCollectionView.swift */,
 				12EB83E31E45A06A00E5698A /* LayoutMarginLabel.swift */,
-				12EB83E41E45A06A00E5698A /* MaxFixedTextView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -229,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				12EB83E71E45A06A00E5698A /* IssueDetailViewController.swift */,
+				124537E81E4EF57500EE4078 /* IssueListViewModel.swift */,
 				12EB83E81E45A06A00E5698A /* IssueListViewController.swift */,
 				12EB83E91E45A06A00E5698A /* Nib */,
 				12EB83EE1E45A06A00E5698A /* View */,
@@ -239,6 +247,7 @@
 		12EB83E91E45A06A00E5698A /* Nib */ = {
 			isa = PBXGroup;
 			children = (
+				124537EA1E4EF8CA00EE4078 /* IssueCellViewModel.swift */,
 				12EB83EA1E45A06A00E5698A /* IssueCell.swift */,
 				12EB83EB1E45A06A00E5698A /* IssueCell.xib */,
 				12EB83EC1E45A06A00E5698A /* IssueCommentCell.swift */,
@@ -480,6 +489,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				124537EB1E4EF8CA00EE4078 /* IssueCellViewModel.swift in Sources */,
 				12EB83FC1E45A06A00E5698A /* Issue.swift in Sources */,
 				12EB84031E45A06A00E5698A /* Collection+Extension.swift in Sources */,
 				12EB84041E45A06A00E5698A /* Date+Extension.swift in Sources */,
@@ -489,21 +499,23 @@
 				12EB83FD1E45A06A00E5698A /* User.swift in Sources */,
 				3247F1B91E1F257800B5CD73 /* AppDelegate.swift in Sources */,
 				12EB84051E45A06A00E5698A /* UIColor+Extension.swift in Sources */,
+				124537ED1E4EF93400EE4078 /* Configurable.swift in Sources */,
 				12EB840E1E45A06A00E5698A /* IssueCommentCell.swift in Sources */,
 				12EB83FA1E45A06A00E5698A /* Config+Router.swift in Sources */,
 				12EB84101E45A06A00E5698A /* IssueDetailHeaderView.swift in Sources */,
+				124537EF1E4F04B300EE4078 /* LayoutAttributable.swift in Sources */,
 				12EB83FF1E45A06A00E5698A /* IssueModel.swift in Sources */,
 				12EB84001E45A06A00E5698A /* IssuesModel.swift in Sources */,
 				12EB840B1E45A06A00E5698A /* IssueListViewController.swift in Sources */,
 				12EB83FE1E45A06A00E5698A /* CommentsModel.swift in Sources */,
 				12EB83FB1E45A06A00E5698A /* Comment.swift in Sources */,
+				124537E91E4EF57500EE4078 /* IssueListViewModel.swift in Sources */,
 				12EB84081E45A06A00E5698A /* LayoutMarginLabel.swift in Sources */,
 				12EB840A1E45A06A00E5698A /* IssueDetailViewController.swift in Sources */,
 				12EB84021E45A06A00E5698A /* DataRequest+Extension.swift in Sources */,
 				12EB84111E45A06A00E5698A /* SignInViewController.swift in Sources */,
 				12EB84061E45A06A00E5698A /* KeyboardInfo.swift in Sources */,
 				12EB84131E45A06A00E5698A /* IssueListPresenter.swift in Sources */,
-				12EB84091E45A06A00E5698A /* MaxFixedTextView.swift in Sources */,
 				12EB84121E45A06A00E5698A /* IssueDetailPresenter.swift in Sources */,
 				12EB840C1E45A06A00E5698A /* IssueCell.swift in Sources */,
 			);
