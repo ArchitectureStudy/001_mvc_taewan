@@ -9,17 +9,16 @@
 import UIKit
 import NibDesignable
 
-class IssueCell: NibDesignableCollectionViewCell, LayoutEistimatable {
-    static var eistimatedLayout: [IndexPath: CGSize] = [:]
+class IssueCell: NibDesignableCollectionViewCell, LayoutEstimatable {
+    static var estimatedLayout: [IndexPath: CGSize] = [:]
   
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subLabel: UILabel!
     @IBOutlet weak var stateButton: UIButton!
     @IBOutlet weak var commentButton: UIButton!
     
-    
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        return self.eistimateLayoutAttributes(layoutAttributes)
+        return self.estimateLayoutAttributes(layoutAttributes)
     }
 }
 

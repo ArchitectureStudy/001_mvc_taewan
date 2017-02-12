@@ -8,33 +8,33 @@
 
 import UIKit
 
-protocol LayoutEistimatable: class {
-    static var eistimatedLayout: [IndexPath: CGSize] { get set }
-    static func eistimatedSizeReset(indexPath: IndexPath?)
+protocol LayoutEstimatable: class {
+    static var estimatedLayout: [IndexPath: CGSize] { get set }
+    static func estimatedSizeReset(indexPath: IndexPath?)
 }
 
-extension LayoutEistimatable where Self: UICollectionViewCell {
-    static func eistimatedSizeReset(indexPath: IndexPath? = nil) {
+extension LayoutEstimatable where Self: UICollectionViewCell {
+    static func estimatedSizeReset(indexPath: IndexPath? = nil) {
         if let key = indexPath {
-            eistimatedLayout[key] = nil
+            estimatedLayout[key] = nil
         } else {
-            eistimatedLayout = [:]
+            estimatedLayout = [:]
         }
     }
     
-    func eistimateLayoutAttributes(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+    func estimateLayoutAttributes(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
         if layoutAttributes.isHidden {
             return layoutAttributes
         }
         
-        if let layoutSize = Self.eistimatedLayout[layoutAttributes.indexPath] {
+        if let layoutSize = Self.estimatedLayout[layoutAttributes.indexPath] {
             layoutAttributes.size = layoutSize
         } else {
             layoutAttributes.size = contentView.systemLayoutSizeFitting(
                 layoutAttributes.size,
                 withHorizontalFittingPriority: UILayoutPriorityRequired,
                 verticalFittingPriority: UILayoutPriorityDefaultLow)
-            Self.eistimatedLayout[layoutAttributes.indexPath] = layoutAttributes.size
+            Self.estimatedLayout[layoutAttributes.indexPath] = layoutAttributes.size
         }
         return layoutAttributes
     }

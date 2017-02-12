@@ -10,7 +10,10 @@ import Foundation
 
 
 struct IssueCellViewModel {
+    //input
+    //??
     
+    //output
     let title: String
     let subLabel: String
     let isOpened: Bool
@@ -24,7 +27,6 @@ struct IssueCellViewModel {
         
         title = data.title
         subLabel = "#\(data.number) \(data.state.display) on \(createdAt) by \(data.user.login)"
-        
         isOpened = data.state == .open
         isCommentHidden = data.comments == 0
         comments = "\(data.comments)"

@@ -9,20 +9,25 @@ import Foundation
 import UIKit
 import Alamofire
 
-class IssueListViewController: UIViewController {
+class IssueListViewController: UIViewController, Configurable {
     
     
     @IBOutlet var collectionView: UICollectionView!
     
     let refreshControl = UIRefreshControl()
     
+    var viewModel: IssueListViewModel?
     var presenter: IssueListPresenter?
     
-    var config: Router.RepositoryConfig? {
+    var repositoryConfig: Router.RepositoryConfig? {
         didSet {
-            presenter = IssueListPresenter(config: config)
+            presenter = IssueListPresenter(config: repositoryConfig)
             presenter?.delegate = self
         }
+    }
+    
+    func configure(_ viewModel: IssueListViewModel) {
+        self.viewModel = viewModel
     }
     
     override func viewDidLoad() {
@@ -51,19 +56,17 @@ class IssueListViewController: UIViewController {
                 return
             }
             controller.title = "#\(issue.number)"
-            controller.config = Router.IssueConfig(repository: config, number: issue.number)
-            
+            controller.config = Router.IssueConfig(repository: repositoryConfig, number: issue.number)
         default: break
         }
         
     }
     
     @IBAction func didTapCreateIssue(_ sender: Any) {
-        let alert = UIAlertController(title: "는 훼이크", message: "힇 속았지?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "닫기", style: .default, handler: { _ in
-            alert.dismiss(animated: true, completion: nil)
-        }))
-        self.present(alert, animated: true, completion: nil)
+        guard let alertController = self.viewModel?.newIssueDidTap() else {
+            return
+        }
+        present(alertController, animated: true, completion: nil)
     }
     
 }
@@ -96,15 +99,12 @@ extension IssueListViewController {
 extension IssueListViewController: IssueListPresenterDelegate {
     func issueListDidLoaded() {
         print("issueListDidLoaded")
-        IssueCell.eistimatedSizeReset()
+        IssueCell.estimatedSizeReset()
         
         refreshControl.endRefreshing()
         collectionView.reloadData()
-        
-        print("presenter?.model.datas.count:\(presenter?.model.datas.count)")
     }
 }
-
 
 extension IssueListViewController: UICollectionViewDataSource {
     
@@ -118,15 +118,16 @@ extension IssueListViewController: UICollectionViewDataSource {
         if let issueCell = cell as? IssueCell,
             let data = presenter?.model.datas[safe: indexPath.row] {
             issueCell.configure(IssueCellViewModel(data))
+            print("indexPath:\(indexPath)")
         }
-        
+        print("indexPath-2:\(indexPath)")
         return cell
     }
     
 }
 
 extension IssueListViewController: UICollectionViewDelegate {
-
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.performSegue(withIdentifier: "Show", sender:  presenter?.model.datas[safe: indexPath.row])
     }
