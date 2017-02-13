@@ -11,7 +11,7 @@ import Alamofire
 
 
 extension Model {
-    public class IssuesModel: NSObject, PaginationModelLoadable {
+    public class IssueListModel: NSObject, PaginationModelLoadable {
         public fileprivate(set) var config: Router.RepositoryConfig
         public var page: Int = 1
         
@@ -62,7 +62,7 @@ extension Model {
 }
 
 
-extension Model.IssuesModel {
+extension Model.IssueListModel {
     func addNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateIssueModel), name: .IssueModelRefresh, object: nil)
     }

@@ -16,12 +16,12 @@ protocol IssueListPresenterDelegate: class {
 
 class IssueListPresenter: NSObject {
     weak var delegate: IssueListPresenterDelegate?
-    let model: Model.IssuesModel
+    let model: Model.IssueListModel
     
     
     init?(config: Router.RepositoryConfig?) {
         guard let repository = config else { return nil }
-        self.model = Model.IssuesModel(config: repository)
+        self.model = Model.IssueListModel(config: repository)
         super.init()
     }
 

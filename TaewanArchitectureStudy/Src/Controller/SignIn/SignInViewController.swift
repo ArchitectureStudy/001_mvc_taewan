@@ -85,7 +85,9 @@ extension SignInViewController {
         
         switch targetController(segue.destination) {
         case let controller as IssueListViewController:
-            controller.repositoryConfig = Router.RepositoryConfig(user: self.userField.text, repo: self.repositoryTextField.text)
+            if let repository = Router.RepositoryConfig(user: self.userField.text, repo: self.repositoryTextField.text) {
+                controller.configure(IssueListViewModel(config: repository))
+            }
         default: break
         }
     }
