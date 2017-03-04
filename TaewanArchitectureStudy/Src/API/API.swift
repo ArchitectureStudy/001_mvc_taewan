@@ -19,18 +19,20 @@ public struct Model {
 
 
 /// DTO 넣어주는것
+@available(*, deprecated, message: "DataObjectUpdatable")
 public protocol DataObjectUpdatable {
     associatedtype DataObjectItemType
     func update(data: DataObjectItemType, withImage: Bool)
 }
 
-
+@available(*, deprecated, message: "ModelLoadable")
 public protocol ModelLoadable: class {
     func refresh() -> DataRequest
 }
 
 
 /// pagination 가능한 기능
+@available(*, deprecated, message: "PaginationModelLoadable")
 public protocol PaginationModelLoadable: ModelLoadable {
     var page: Int { get }
     func loadMore() -> DataRequest

@@ -111,14 +111,21 @@ extension Router: URLRequestConvertible {
         return request
     }
     
+    public var dataRequest: DataRequest {
+        return Router.manager.request(self)
+    }
+    
+    @available(*, deprecated, message: "rx 방식으로 이용하자.")
     public func responseSwiftyJSON(_ completionHandler: @escaping (DataResponse<JSON>) -> Void) -> DataRequest {
         return Router.manager.request(self).responseSwiftyJSON(completionHandler)
     }
     
+    @available(*, deprecated, message: "rx 방식으로 이용하자.")
     public func responseObject<T: ResponseObjectSerializable>(_ completionHandler: @escaping (DataResponse<T>) -> Void) -> DataRequest {
         return Router.manager.request(self).responseObject(completionHandler)
     }
     
+    @available(*, deprecated, message: "rx 방식으로 이용하자.")
     public func responseCollection<T: ResponseObjectSerializable>(_ completionHandler: @escaping (DataResponse<[T]>) -> Void) -> DataRequest {
         return Router.manager.request(self).responseCollection(completionHandler)
     }
