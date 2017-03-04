@@ -28,18 +28,10 @@ class IssueDetailViewController: UIViewController {
     
     let refreshControl = UIRefreshControl()
     
-    var presenter: IssueDetailPresenter?
-    
-    var config: Router.IssueConfig? {
-        didSet {
-            presenter = IssueDetailPresenter(config: config)
-            presenter?.delegate = self
-        }
-    }
-    
+
     @IBAction func didTapCreateComment(_ sender: Any) {
         guard let body = commentTextView.text, !body.isEmpty else { return }
-        presenter?.create(comment: body)
+//        presenter?.create(comment: body)
         commentButton.isEnabled = false
         commentTextView.text = nil
     }
@@ -61,12 +53,12 @@ extension IssueDetailViewController: IssueDetailPresenterDelegate {
     
     func issueDidLoaded() {
         refreshControl.endRefreshing()
-        
-        if let data = presenter?.service.data {
-            headerView.update(data: data)
-            collectionView.updateOffsetHeader()
-            refreshControl.bounds.origin.y = headerView.bounds.height
-        }
+//        
+//        if let data = presenter?.service.data {
+//            headerView.update(data: data)
+//            collectionView.updateOffsetHeader()
+//            refreshControl.bounds.origin.y = headerView.bounds.height
+//        }
         
         collectionView.reloadData()
         
@@ -99,7 +91,7 @@ extension IssueDetailViewController  {
     }
     
     func refresh(sender: Any) {
-        presenter?.refresh()
+//        presenter?.refresh()
     }
 }
 
@@ -108,19 +100,20 @@ extension IssueDetailViewController: UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommentCell", for: indexPath)
-        guard let comment = presenter?.service.commentService.datas[safe: indexPath.row] else {
-            return cell
-        }
+//        guard let comment = presenter?.service.commentService.datas[safe: indexPath.row] else {
+//            return cell
+//        }
         
-        if let commentCell = cell as? IssueCommentCell {
-            commentCell.update(data: comment, withImage: true)
-        }
+//        if let commentCell = cell as? IssueCommentCell {
+//            commentCell.update(data: comment, withImage: true)
+//        }
         
         return cell
     }
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return presenter?.service.commentService.datas.count ?? 0
+        return 0
+//        return presenter?.service.commentService.datas.count ?? 0
     }
 }
 
@@ -135,9 +128,9 @@ extension IssueDetailViewController: UICollectionViewDelegateFlowLayout {
             return estimatedSize
         }
         
-        if let data = presenter?.service.commentService.datas[safe: indexPath.row] {
-            estimateCell.update(data: data, withImage: false)
-        }
+//        if let data = presenter?.service.commentService.datas[safe: indexPath.row] {
+//            estimateCell.update(data: data, withImage: false)
+//        }
         
         estimatedSize = estimateCell.contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: UILayoutPriorityRequired, verticalFittingPriority: UILayoutPriorityDefaultLow)
         estimatedSizes[indexPath] = estimatedSize

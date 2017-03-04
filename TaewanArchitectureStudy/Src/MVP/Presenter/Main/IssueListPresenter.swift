@@ -8,12 +8,12 @@
 
 import Foundation
 
-
+@available(*, deprecated, message: "Presenter 제거")
 protocol IssueListPresenterDelegate: class {
     func issueListDidLoaded()
 }
 
-
+@available(*, deprecated, message: "Presenter 제거")
 class IssueListPresenter: NSObject {
     weak var delegate: IssueListPresenterDelegate?
     let service: IssueListService
@@ -26,15 +26,15 @@ class IssueListPresenter: NSObject {
     }
 
     func refresh() {
-        service.refresh().response { [weak self] _ in
-            self?.delegate?.issueListDidLoaded()
-        }
+//        service.refresh().response { [weak self] _ in
+//            self?.delegate?.issueListDidLoaded()
+//        }
     }
     
     func loadMore() {
-        service.loadMore().response { [weak self] _ in
-            self?.delegate?.issueListDidLoaded()
-        }
+//        service.loadMore().response { [weak self] _ in
+//            self?.delegate?.issueListDidLoaded()
+//        }
     }
     
 }

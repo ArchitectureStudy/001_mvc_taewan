@@ -8,68 +8,75 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
+import RxDataSources
+
+
+
+typealias IssueListSection = SectionModel<Void, IssueCellModelType>
 
 protocol IssueListViewModelType: class, ViewModelType {
     
-    var config: Router.RepositoryConfig { get }
+    /// service는 viewModel에서만 관리하면 좋겠는데.. private 로는 못하낭 ㅠㅜ
     var service: IssueListService { get }
     //네트워크 모델도 여기에 있어야하지 않을까?
     
-    //콜렉션 뷰가 여기에 있어야하나? reloadData 시키는거때문에?
-    var numberOfItems: Int { get }
-    var listDidLoaded: (()->Void)? { get set }
+    // MARK: Input
+    var beginRefresh: PublishSubject<Void> { get }
+    var loadMore: PublishSubject<Void> { get }
+    var itemDidSelect: PublishSubject<IndexPath> { get }
     
-    //input
-    func newIssueDidTap() -> UIAlertController
-    
-    //refresh / pull to refresh
-    func refresh(sender: Any)
-    func loadmore()
-    
-    //output
-    //네비게이션 타이틀 주는거.
-    //여기서 셀에 적용을 해줄까?
-    
-    
-    
+    // MARK: Ouput
+    var sections: Driver<[IssueListSection]> { get }
+    var endRefresh: Observable<Void> { get }
+    var presentIsseuDetailViewModel: Observable<IssueDetailViewModelType> { get }
 }
 
 
-class IssueListViewModel: IssueListViewModelType {
-    let config: Router.RepositoryConfig
+class IssueListViewModel: NSObject, IssueListViewModelType {
+    
     let service: IssueListService
     
-    var listDidLoaded: (()->Void)? = nil
+    public let beginRefresh: PublishSubject<Void> = PublishSubject<Void>()
+    public let loadMore: PublishSubject<Void> = PublishSubject<Void>()
+    public let itemDidSelect: PublishSubject<IndexPath> = PublishSubject<IndexPath>()
     
-    var numberOfItems: Int {
-        return service.datas.count
-    }
+    public let sections: Driver<[IssueListSection]>
+    public let endRefresh: Observable<Void>
+    public let presentIsseuDetailViewModel: Observable<IssueDetailViewModelType>
     
     init(config: Router.RepositoryConfig) {
-        self.config = config
         service = IssueListService(config: config)
+        sections = service.dataSource
+            .asObservable()
+            .map { (value: [Model.Issue]) -> IssueListSection in
+                IssueListSection(model: Void(), items: value.flatMap { IssueCellModel($0) })
+            }.map { section -> [IssueListSection] in
+                [section]
+            }.asDriver(onErrorJustReturn: [])
+        
+        endRefresh = sections.asObservable().map { _ in }
+        
+        presentIsseuDetailViewModel = itemDidSelect
+            .withLatestFrom(sections) { (indexPath: IndexPath, sections: [IssueListSection]) -> IssueModelType in
+                sections[indexPath.section].items[indexPath.row] as IssueModelType
+            }.map { IssueDetailViewModel(config: config, issue: $0) }
+        
+        
+        super.init()
+        
+        _ = beginRefresh
+            .takeUntil(rx.deallocated)
+            .bindTo(service.refresh)
+        
+        _ = loadMore
+            .takeUntil(rx.deallocated)
+            .bindTo(service.loadMore)
+        
     }
     
-    func newIssueDidTap() -> UIAlertController {
-        let alert = UIAlertController(title: "는 훼이크", message: "힇 속았지?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "닫기", style: .default, handler: { _ in
-            alert.dismiss(animated: true, completion: nil)
-        }))
-        return alert
-    }
     
-    @objc
-    func refresh(sender: Any) {
-        service.refresh().response { [weak self] _ in
-            self?.listDidLoaded?()
-        }
-    }
     
-    func loadmore() {
-        service.loadMore().response { [weak self] _ in
-            self?.listDidLoaded?()
-        }
-    }
     
 }
 

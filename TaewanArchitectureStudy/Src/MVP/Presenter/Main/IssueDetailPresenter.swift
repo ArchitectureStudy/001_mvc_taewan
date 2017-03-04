@@ -8,13 +8,13 @@
 
 import Foundation
 
-
+@available(*, deprecated, message: "Presenter 제거")
 protocol IssueDetailPresenterDelegate: class {
     func issueDidLoaded()
     func createdComment()
 }
 
-
+@available(*, deprecated, message: "Presenter 제거")
 class IssueDetailPresenter: NSObject {
     weak var delegate: IssueDetailPresenterDelegate?
     let service: IssueDetailService

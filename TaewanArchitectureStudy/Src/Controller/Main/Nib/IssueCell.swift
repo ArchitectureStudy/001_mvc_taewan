@@ -22,9 +22,9 @@ class IssueCell: NibDesignableCollectionViewCell, LayoutEstimatable {
     }
 }
 
-extension IssueCell: Configurable {
+extension IssueCell: Configurable, AnyConfigurable {
     
-    func configure(_ viewModel: IssueCellViewModel?) {
+    func configure(_ viewModel: IssueCellModelType?) {
         guard let viewModel = viewModel else { return }
         titleLabel.text = viewModel.title
         subLabel.text = viewModel.subLabel

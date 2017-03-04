@@ -5,83 +5,81 @@
 //  Created by kimtaewan on 2017. 1. 16..
 //  Copyright © 2017년 taewankim. All rights reserved.
 //
+//  Service는 서버의 상태와 동일하게 구성해주자! 가공없이!
+//
 
 import Foundation
 import Alamofire
+import RxSwift
 
 
-public class IssueListService: NSObject, PaginationModelLoadable {
-    public fileprivate(set) var config: Router.RepositoryConfig
-    public var page: Int = 1
+/// Service에서도 Rx를 쓸까 말까 고민을 했는데... 
+/// 음... 로드 방식 자체를 Rx를 사용했기때문에 그냥 여기서도 쓰기로!!
+public protocol IssueListServiceType {
+    // MARK: Property
+    var page: Int { get }
     
-    public fileprivate(set) var datas: [Model.Issue] = []
+    // MARK: Input
+    var refresh: PublishSubject<Void> { get }
+    var loadMore: PublishSubject<Void> { get }
     
-    init(config: Router.RepositoryConfig) {
-        self.config = config
-        super.init()
-        addNotifications()
-    }
-    
-    deinit {
-        removeNotifications()
-    }
-    
-    @discardableResult
-    public func refresh() -> DataRequest {
-        self.page = 1
-        
-        return Router.issues(config: config, page: nil)
-            .responseCollection { [unowned self] (response: DataResponse<[Model.Issue]>) in
-                switch response.result {
-                case .success(let value):
-                    self.datas = value
-                    self.page += 1
-                case .failure(let error):
-                    debugPrint(error)
-                }
-        }
-    }
-    
-    @discardableResult
-    public func loadMore() -> DataRequest {
-        return Router.issues(config: config, page: self.page)
-            .responseCollection { [unowned self] (response: DataResponse<[Model.Issue]>) in
-                switch response.result {
-                case .success(let value):
-                    self.datas += value
-                    self.page += 1
-                case .failure(let error):
-                    debugPrint(error)
-                }
-        }
-    }//load
-    
+    // MARK: Output
+    var dataSource: Variable<[Model.Issue]> { get }
 }
 
 
 
-extension IssueListService {
-    func addNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(updateIssueModel), name: .IssueModelRefresh, object: nil)
+public class IssueListService: NSObject, IssueListServiceType {
+    public static let updateIssue: PublishSubject<Model.Issue> = PublishSubject<Model.Issue>()
+    
+    public let config: Router.RepositoryConfig
+    
+    public private(set) var page: Int = 1
+    
+    public let refresh: PublishSubject<Void> = PublishSubject<Void>()
+    public let loadMore: PublishSubject<Void> = PublishSubject<Void>()
+    
+    public let dataSource: Variable<[Model.Issue]> = Variable([])
+    
+    init(config: Router.RepositoryConfig) {
+        self.config = config
+        super.init()
+        rxSetup()
     }
     
-    func removeNotifications() {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-    @objc func updateIssueModel(_ notification: Notification) {
-        guard let model = notification.object as? IssueDetailService,
-            let userInfo = notification.userInfo else { return }
-        //config 내용이 다르면 아무작업도 안합니당
-        guard let issue = userInfo[Notification.Key.IssuesModel] as? Model.Issue,
-            self.config == model.config.repository else { return }
-        let len = self.datas.count
-        for i in 0..<len {
-            if self.datas[i].id == issue.id {
-                self.datas[i] = issue
-                return
-            }
-        }
+    private func rxSetup() {
+        //일치 Model.Issue 업데이트
+        _ = IssueListService
+            .updateIssue
+            .takeUntil(rx.deallocated)
+            .subscribe(onNext: { [unowned self] issue in
+                guard let index = self.dataSource.value.index(of: issue) else { return }
+                self.dataSource.value[index] = issue
+            })
+        
+        
+        let config = self.config
+        
+        _ = refresh
+            .takeUntil(rx.deallocated)
+            .do(onNext: { [unowned self] _ in
+                self.page = 1
+            }).flatMap { _ -> Observable<[Model.Issue]> in
+                Router.issues(config: config, page: nil).dataRequest.rx.responseCollection()
+            }.subscribe(onNext: { [unowned self] (value: [Model.Issue]) in
+                self.dataSource.value = value
+            })
+        
+        _ = loadMore
+            .takeUntil(rx.deallocated)
+            .map { [unowned self] in
+                self.page += 1
+                return self.page
+            }.flatMap { page -> Observable<[Model.Issue]> in
+                Router.issues(config: config, page: page).dataRequest.rx.responseCollection()
+            }.subscribe(onNext: { [unowned self] (value: [Model.Issue]) in
+                self.dataSource.value += value
+            })
     }
     
 }

@@ -8,24 +8,19 @@
 
 import Foundation
 import Alamofire
+import RxSwift
 
-//extension Notification {
-//    public struct Data : RawRepresentable, Equatable, Hashable, Comparable {
-//
-//        var hashValue: Int {
-//            return x.hashValue ^ y.hashValue
-//        }
-//
-//        public init(_ rawValue: String) {
-//
-//        }
-//    }
-//}
-//extension Notification {
-//    var dataInfo: [Notification.Key: Any]? {
-//        self.userInfo
-//    }
-//}
+public protocol IssueDetailServiceType {
+    // MARK: Property
+    var page: Int { get }
+    
+    // MARK: Input
+    var refresh: PublishSubject<Void> { get }
+    var loadMore: PublishSubject<Void> { get }
+    
+    // MARK: Output
+    var dataSource: Variable<[Model.Issue]> { get }
+}
 
 extension Notification.Name {
     static let IssueModelRefresh = Notification.Name("IssueModelRefresh")
@@ -37,9 +32,7 @@ extension Notification.Key {
 }
 
 public class IssueDetailService: NSObject, ModelLoadable {
-    
-    public private(set) var config: Router.IssueConfig
-    
+    public let config: Router.IssueConfig
     public private(set) var data: Model.Issue?
     
     lazy var commentService: CommentService = { [unowned self] in
