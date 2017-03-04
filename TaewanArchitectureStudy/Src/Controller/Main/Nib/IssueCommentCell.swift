@@ -50,7 +50,7 @@ extension IssueCommentCell {
 }
 
 extension IssueCommentCell: DataObjectUpdatable {
-    func update(data: DataObject.Comment, withImage: Bool = false) {
+    func update(data: Model.Comment, withImage: Bool = false) {
         if let url = data.user.avatarURL, withImage {
             avatarImageView.af_setImage(withURL: url)
         }

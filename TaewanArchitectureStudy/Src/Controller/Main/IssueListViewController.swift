@@ -55,7 +55,7 @@ class IssueListViewController: UIViewController, Configurable {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.destination {
         case let controller as IssueDetailViewController:
-            guard let issue = sender as? DataObject.Issue else {
+            guard let issue = sender as? Model.Issue else {
                 assertionFailure("issue data is null")
                 return
             }
@@ -85,7 +85,7 @@ extension IssueListViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "IssueCell", for: indexPath)
         
         if let issueCell = cell as? IssueCell,
-            let data = viewModel?.model.datas[safe: indexPath.row] {
+            let data = viewModel?.service.datas[safe: indexPath.row] {
             issueCell.configure(IssueCellViewModel(data))
         }
         return cell
@@ -96,7 +96,7 @@ extension IssueListViewController: UICollectionViewDataSource {
 extension IssueListViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "Show", sender: viewModel?.model.datas[safe: indexPath.row])
+        self.performSegue(withIdentifier: "Show", sender: viewModel?.service.datas[safe: indexPath.row])
     }
     
 }

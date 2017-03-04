@@ -10,12 +10,12 @@ import Foundation
 import SwiftyJSON
 
 
-extension DataObject {
+extension Model {
     public struct Issue: ResponseCollectionSerializable, ResponseObjectSerializable {
         let id: Int
         let number: Int
         let title: String
-        let user: DataObject.User
+        let user: Model.User
         let state: State
         let comments: Int
         let body: String
@@ -27,7 +27,7 @@ extension DataObject {
             id = json["id"].intValue
             number = json["number"].intValue
             title = json["title"].stringValue
-            user = DataObject.User(json: json["user"])
+            user = Model.User(json: json["user"])
             state = State(rawValue: json["state"].stringValue) ?? .none
             comments = json["comments"].intValue
             body = json["body"].stringValue
@@ -41,7 +41,7 @@ extension DataObject {
     }
 }
 
-extension DataObject.Issue {
+extension Model.Issue {
     enum State: String {
         case open = "open", close = "close", none = "none"
         
@@ -56,8 +56,8 @@ extension DataObject.Issue {
 }
 
 
-extension DataObject.Issue: Equatable {
-    public static func ==(lhs: DataObject.Issue, rhs: DataObject.Issue) -> Bool {
+extension Model.Issue: Equatable {
+    public static func ==(lhs: Model.Issue, rhs: Model.Issue) -> Bool {
         return lhs.id == rhs.id
     }
 }

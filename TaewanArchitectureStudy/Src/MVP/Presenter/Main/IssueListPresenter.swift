@@ -16,23 +16,23 @@ protocol IssueListPresenterDelegate: class {
 
 class IssueListPresenter: NSObject {
     weak var delegate: IssueListPresenterDelegate?
-    let model: Model.IssueListModel
+    let service: IssueListService
     
     
     init?(config: Router.RepositoryConfig?) {
         guard let repository = config else { return nil }
-        self.model = Model.IssueListModel(config: repository)
+        self.service = IssueListService(config: repository)
         super.init()
     }
 
     func refresh() {
-        model.refresh().response { [weak self] _ in
+        service.refresh().response { [weak self] _ in
             self?.delegate?.issueListDidLoaded()
         }
     }
     
     func loadMore() {
-        model.loadMore().response { [weak self] _ in
+        service.loadMore().response { [weak self] _ in
             self?.delegate?.issueListDidLoaded()
         }
     }

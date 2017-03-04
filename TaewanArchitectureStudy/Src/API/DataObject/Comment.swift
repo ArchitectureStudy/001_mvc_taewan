@@ -10,11 +10,11 @@ import Foundation
 import SwiftyJSON
 
 
-extension DataObject {
+extension Model {
     public struct Comment: ResponseCollectionSerializable, ResponseObjectSerializable {
         
         let id: Int
-        let user: DataObject.User
+        let user: Model.User
         
         let body: String
         let createdAt: Date?
@@ -22,7 +22,7 @@ extension DataObject {
         
         public init(json: JSON) {
             id = json["id"].intValue
-            user = DataObject.User(json: json["user"])
+            user = Model.User(json: json["user"])
             body = json["body"].stringValue
             
             let format = DateFormatter()

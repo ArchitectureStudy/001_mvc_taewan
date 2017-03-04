@@ -17,16 +17,16 @@ protocol IssueDetailPresenterDelegate: class {
 
 class IssueDetailPresenter: NSObject {
     weak var delegate: IssueDetailPresenterDelegate?
-    let model: Model.IssueModel
+    let service: IssueService
     
     init?(config: Router.IssueConfig?) {
         guard let issue = config else { return nil }
-        self.model = Model.IssueModel(config: issue)
+        self.service = IssueService(config: issue)
         super.init()
     }
     
     func refresh(withComment: Bool = true) {
-        model.refresh().response { [weak self] _ in
+        service.refresh().response { [weak self] _ in
             self?.delegate?.issueDidLoaded()
             if withComment {
                 self?.refreshComments()
@@ -35,14 +35,14 @@ class IssueDetailPresenter: NSObject {
     }
     
     func create(comment: String) {
-        model.comments.create(body: comment).response { [weak self] _ in
+        service.commentService.create(body: comment).response { [weak self] _ in
             self?.delegate?.createdComment()
             self?.refresh(withComment: false)
         }
     }
     
     private func refreshComments() {
-        model.comments.refresh().response { [weak self] _ in
+        service.commentService.refresh().response { [weak self] _ in
             self?.delegate?.issueDidLoaded()
         }
     }    

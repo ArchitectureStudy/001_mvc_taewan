@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 
 
-extension DataObject {
+extension Model {
     public struct User: ResponseCollectionSerializable, ResponseObjectSerializable {
         let id: Int
         let login: String

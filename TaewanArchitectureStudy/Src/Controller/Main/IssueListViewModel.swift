@@ -6,12 +6,13 @@
 //  Copyright © 2017년 taewankim. All rights reserved.
 //
 
-import UIKit
+import Foundation
+import RxSwift
 
-protocol IssueListViewModelProtocol: class {
+protocol IssueListViewModelType: class, ViewModelType {
     
     var config: Router.RepositoryConfig { get }
-    var model: Model.IssueListModel { get }
+    var service: IssueListService { get }
     //네트워크 모델도 여기에 있어야하지 않을까?
     
     //콜렉션 뷰가 여기에 있어야하나? reloadData 시키는거때문에?
@@ -34,19 +35,19 @@ protocol IssueListViewModelProtocol: class {
 }
 
 
-class IssueListViewModel: IssueListViewModelProtocol {
+class IssueListViewModel: IssueListViewModelType {
     let config: Router.RepositoryConfig
-    let model: Model.IssueListModel
+    let service: IssueListService
     
     var listDidLoaded: (()->Void)? = nil
     
     var numberOfItems: Int {
-        return model.datas.count
+        return service.datas.count
     }
     
     init(config: Router.RepositoryConfig) {
         self.config = config
-        model = Model.IssueListModel(config: config)
+        service = IssueListService(config: config)
     }
     
     func newIssueDidTap() -> UIAlertController {
@@ -59,13 +60,13 @@ class IssueListViewModel: IssueListViewModelProtocol {
     
     @objc
     func refresh(sender: Any) {
-        model.refresh().response { [weak self] _ in
+        service.refresh().response { [weak self] _ in
             self?.listDidLoaded?()
         }
     }
     
     func loadmore() {
-        model.loadMore().response { [weak self] _ in
+        service.loadMore().response { [weak self] _ in
             self?.listDidLoaded?()
         }
     }

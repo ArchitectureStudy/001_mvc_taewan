@@ -12,15 +12,14 @@ import Foundation
 import Foundation
 import Alamofire
 
-extension Model {
-    public class CommentsModel: ModelLoadable {
-        private var issueModel: Model.IssueModel
+    public class CommentService: ModelLoadable {
+        private var issueModel: IssueService
         
         public var page: Int = 1
         
-        public private(set) var datas: [DataObject.Comment] = []
+        public private(set) var datas: [Model.Comment] = []
         
-        init(issueModel: Model.IssueModel) {
+        init(issueModel: IssueService) {
             self.issueModel = issueModel
         }
         
@@ -30,7 +29,7 @@ extension Model {
             let config = issueModel.config
             
             return Router.comments(config: config, page: page)
-                .responseCollection { [unowned self] (response: DataResponse<[DataObject.Comment]>) in
+                .responseCollection { [unowned self] (response: DataResponse<[Model.Comment]>) in
                     switch response.result {
                     case .success(let value):
                         self.datas = value
@@ -45,7 +44,7 @@ extension Model {
         public func create(body: String) -> DataRequest {
             let config = issueModel.config
             return Router.createComment(config: config, body: body)
-                .responseObject { [unowned self] (response: DataResponse<DataObject.Comment>) in
+                .responseObject { [unowned self] (response: DataResponse<Model.Comment>) in
                     switch response.result {
                     case .success(let value):
                         self.datas.append(value)
@@ -57,6 +56,5 @@ extension Model {
         }
         
     }
-    
-}
+
 

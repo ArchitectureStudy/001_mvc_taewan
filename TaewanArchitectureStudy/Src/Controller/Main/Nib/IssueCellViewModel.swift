@@ -9,7 +9,7 @@
 import Foundation
 
 
-struct IssueCellViewModel {
+struct IssueCellViewModel: ViewModelType {
     //input
     //??
     
@@ -20,7 +20,7 @@ struct IssueCellViewModel {
     let isCommentHidden: Bool
     let comments: String
     
-    init?(_ data: DataObject.Issue?) {
+    init?(_ data: Model.Issue?) {
         guard let data = data else { return nil }
         
         let createdAt = data.createdAt?.string(dateFormat: "DD MMM yyyy") ?? "-"

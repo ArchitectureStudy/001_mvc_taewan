@@ -62,7 +62,7 @@ extension IssueDetailViewController: IssueDetailPresenterDelegate {
     func issueDidLoaded() {
         refreshControl.endRefreshing()
         
-        if let data = presenter?.model.data {
+        if let data = presenter?.service.data {
             headerView.update(data: data)
             collectionView.updateOffsetHeader()
             refreshControl.bounds.origin.y = headerView.bounds.height
@@ -108,8 +108,7 @@ extension IssueDetailViewController: UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CommentCell", for: indexPath)
-        
-        guard let comment = presenter?.model.comments.datas[safe: indexPath.row] else {
+        guard let comment = presenter?.service.commentService.datas[safe: indexPath.row] else {
             return cell
         }
         
@@ -121,7 +120,7 @@ extension IssueDetailViewController: UICollectionViewDataSource {
     }
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return presenter?.model.comments.datas.count ?? 0
+        return presenter?.service.commentService.datas.count ?? 0
     }
 }
 
@@ -136,7 +135,7 @@ extension IssueDetailViewController: UICollectionViewDelegateFlowLayout {
             return estimatedSize
         }
         
-        if let data = presenter?.model.comments.datas[safe: indexPath.row] {
+        if let data = presenter?.service.commentService.datas[safe: indexPath.row] {
             estimateCell.update(data: data, withImage: false)
         }
         

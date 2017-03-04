@@ -33,9 +33,9 @@ extension IssueDetailHeaderView {
         stateButton.clipsToBounds = true
         stateButton.layer.cornerRadius = 2
         
-        stateButton.setTitle(DataObject.Issue.State.open.display, for: .normal)
+        stateButton.setTitle(Model.Issue.State.open.display, for: .normal)
         stateButton.setBackgroundImage(UIColor.opened.toImage(), for: .normal)
-        stateButton.setTitle(DataObject.Issue.State.close.display, for: .selected)
+        stateButton.setTitle(Model.Issue.State.close.display, for: .selected)
         stateButton.setBackgroundImage(UIColor.closed.toImage(), for: .selected)
         
         avatarImageView.clipsToBounds = true
@@ -51,7 +51,7 @@ extension IssueDetailHeaderView {
 }
 
 extension IssueDetailHeaderView: DataObjectUpdatable {
-    func update(data: DataObject.Issue, withImage: Bool = true) {
+    func update(data: Model.Issue, withImage: Bool = true) {
         
         let createdAt = data.createdAt?.string(dateFormat: "DD MMM yyyy") ?? "-"
         titleLabel.text = data.title
