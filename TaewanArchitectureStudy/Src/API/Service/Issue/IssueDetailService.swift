@@ -36,7 +36,7 @@ extension Notification.Key {
     static let IssuesModel = "org.alamofire.notification.key.task"
 }
 
-public class IssueService: NSObject, ModelLoadable {
+public class IssueDetailService: NSObject, ModelLoadable {
     
     public private(set) var config: Router.IssueConfig
     
@@ -82,7 +82,7 @@ public class IssueService: NSObject, ModelLoadable {
 
 
 
-extension IssueService {
+extension IssueDetailService {
     func addNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(updateIssueModel), name: .IssueModelRefresh, object: nil)//object 에서 무슨일을 하는지 알려주세요!
     }
@@ -93,7 +93,7 @@ extension IssueService {
     }
     
     @objc func updateIssueModel(_ notification: Notification) {
-        guard let model = notification.object as? IssueService,
+        guard let model = notification.object as? IssueDetailService,
             let userInfo = notification.userInfo else { return }
         if model == self {
             print("updateIssueModel: 자기자신은 패스!!")

@@ -12,15 +12,15 @@
 		124537ED1E4EF93400EE4078 /* Configurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124537EC1E4EF93400EE4078 /* Configurable.swift */; };
 		124537EF1E4F04B300EE4078 /* LayoutAttributable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124537EE1E4F04B300EE4078 /* LayoutAttributable.swift */; };
 		126FEBA31E357DD80075D9EF /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 126FEBA11E357DD80075D9EF /* SignIn.storyboard */; };
-		12EB83F91E45A06A00E5698A /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EB83C91E45A06A00E5698A /* API.swift */; };
-		12EB83FA1E45A06A00E5698A /* Config+Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EB83CA1E45A06A00E5698A /* Config+Router.swift */; };
-		12EB83FB1E45A06A00E5698A /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EB83CC1E45A06A00E5698A /* Comment.swift */; };
-		12EB83FC1E45A06A00E5698A /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EB83CD1E45A06A00E5698A /* Issue.swift */; };
-		12EB83FD1E45A06A00E5698A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EB83CE1E45A06A00E5698A /* User.swift */; };
-		12EB83FE1E45A06A00E5698A /* CommentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EB83D11E45A06A00E5698A /* CommentService.swift */; };
-		12EB83FF1E45A06A00E5698A /* IssueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EB83D31E45A06A00E5698A /* IssueService.swift */; };
-		12EB84001E45A06A00E5698A /* IssueLisetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EB83D41E45A06A00E5698A /* IssueLisetService.swift */; };
-		12EB84011E45A06A00E5698A /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EB83D51E45A06A00E5698A /* Router.swift */; };
+		1283F06E1E6A5CC6009752C4 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1283F0611E6A5CC6009752C4 /* API.swift */; };
+		1283F06F1E6A5CC6009752C4 /* Config+Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1283F0621E6A5CC6009752C4 /* Config+Router.swift */; };
+		1283F0701E6A5CC6009752C4 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1283F0641E6A5CC6009752C4 /* Comment.swift */; };
+		1283F0711E6A5CC6009752C4 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1283F0651E6A5CC6009752C4 /* Issue.swift */; };
+		1283F0721E6A5CC6009752C4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1283F0661E6A5CC6009752C4 /* User.swift */; };
+		1283F0731E6A5CC6009752C4 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1283F0671E6A5CC6009752C4 /* Router.swift */; };
+		1283F0741E6A5CC6009752C4 /* CommentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1283F06A1E6A5CC6009752C4 /* CommentService.swift */; };
+		1283F0751E6A5CC6009752C4 /* IssueListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1283F06C1E6A5CC6009752C4 /* IssueListService.swift */; };
+		1283F0761E6A5CC6009752C4 /* IssueDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1283F06D1E6A5CC6009752C4 /* IssueDetailService.swift */; };
 		12EB84021E45A06A00E5698A /* DataRequest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EB83D91E45A06A00E5698A /* DataRequest+Extension.swift */; };
 		12EB84031E45A06A00E5698A /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EB83DB1E45A06A00E5698A /* Collection+Extension.swift */; };
 		12EB84041E45A06A00E5698A /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EB83DC1E45A06A00E5698A /* Date+Extension.swift */; };
@@ -51,15 +51,15 @@
 		124537EC1E4EF93400EE4078 /* Configurable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configurable.swift; sourceTree = "<group>"; };
 		124537EE1E4F04B300EE4078 /* LayoutAttributable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutAttributable.swift; sourceTree = "<group>"; };
 		126FEBA21E357DD80075D9EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SignIn.storyboard; sourceTree = "<group>"; };
-		12EB83C91E45A06A00E5698A /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
-		12EB83CA1E45A06A00E5698A /* Config+Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Config+Router.swift"; sourceTree = "<group>"; };
-		12EB83CC1E45A06A00E5698A /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
-		12EB83CD1E45A06A00E5698A /* Issue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
-		12EB83CE1E45A06A00E5698A /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		12EB83D11E45A06A00E5698A /* CommentService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentService.swift; sourceTree = "<group>"; };
-		12EB83D31E45A06A00E5698A /* IssueService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueService.swift; sourceTree = "<group>"; };
-		12EB83D41E45A06A00E5698A /* IssueLisetService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueLisetService.swift; sourceTree = "<group>"; };
-		12EB83D51E45A06A00E5698A /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		1283F0611E6A5CC6009752C4 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		1283F0621E6A5CC6009752C4 /* Config+Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Config+Router.swift"; sourceTree = "<group>"; };
+		1283F0641E6A5CC6009752C4 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		1283F0651E6A5CC6009752C4 /* Issue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
+		1283F0661E6A5CC6009752C4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		1283F0671E6A5CC6009752C4 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		1283F06A1E6A5CC6009752C4 /* CommentService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentService.swift; sourceTree = "<group>"; };
+		1283F06C1E6A5CC6009752C4 /* IssueListService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueListService.swift; sourceTree = "<group>"; };
+		1283F06D1E6A5CC6009752C4 /* IssueDetailService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueDetailService.swift; sourceTree = "<group>"; };
 		12EB83D91E45A06A00E5698A /* DataRequest+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataRequest+Extension.swift"; sourceTree = "<group>"; };
 		12EB83DB1E45A06A00E5698A /* Collection+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Collection+Extension.swift"; sourceTree = "<group>"; };
 		12EB83DC1E45A06A00E5698A /* Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
@@ -100,65 +100,63 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1283F0601E6A5CC6009752C4 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				1283F0681E6A5CC6009752C4 /* Service */,
+				1283F0631E6A5CC6009752C4 /* Model */,
+				1283F0611E6A5CC6009752C4 /* API.swift */,
+				1283F0621E6A5CC6009752C4 /* Config+Router.swift */,
+				1283F0671E6A5CC6009752C4 /* Router.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		1283F0631E6A5CC6009752C4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1283F0641E6A5CC6009752C4 /* Comment.swift */,
+				1283F0651E6A5CC6009752C4 /* Issue.swift */,
+				1283F0661E6A5CC6009752C4 /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1283F0681E6A5CC6009752C4 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				1283F0691E6A5CC6009752C4 /* Comment */,
+				1283F06B1E6A5CC6009752C4 /* Issue */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		1283F0691E6A5CC6009752C4 /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				1283F06A1E6A5CC6009752C4 /* CommentService.swift */,
+			);
+			path = Comment;
+			sourceTree = "<group>";
+		};
+		1283F06B1E6A5CC6009752C4 /* Issue */ = {
+			isa = PBXGroup;
+			children = (
+				1283F06D1E6A5CC6009752C4 /* IssueDetailService.swift */,
+				1283F06C1E6A5CC6009752C4 /* IssueListService.swift */,
+			);
+			path = Issue;
+			sourceTree = "<group>";
+		};
 		12EB83C71E45A06A00E5698A /* Src */ = {
 			isa = PBXGroup;
 			children = (
-				12EB83C81E45A06A00E5698A /* API */,
+				1283F0601E6A5CC6009752C4 /* API */,
 				12EB83D61E45A06A00E5698A /* Common */,
 				12EB83E51E45A06A00E5698A /* Controller */,
 				12EB83F21E45A06A00E5698A /* MVP */,
 			);
 			path = Src;
-			sourceTree = "<group>";
-		};
-		12EB83C81E45A06A00E5698A /* API */ = {
-			isa = PBXGroup;
-			children = (
-				12EB83CF1E45A06A00E5698A /* Service */,
-				12EB83CB1E45A06A00E5698A /* Model */,
-				12EB83C91E45A06A00E5698A /* API.swift */,
-				12EB83CA1E45A06A00E5698A /* Config+Router.swift */,
-				12EB83D51E45A06A00E5698A /* Router.swift */,
-			);
-			path = API;
-			sourceTree = "<group>";
-		};
-		12EB83CB1E45A06A00E5698A /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				12EB83CC1E45A06A00E5698A /* Comment.swift */,
-				12EB83CD1E45A06A00E5698A /* Issue.swift */,
-				12EB83CE1E45A06A00E5698A /* User.swift */,
-			);
-			name = Model;
-			path = DataObject;
-			sourceTree = "<group>";
-		};
-		12EB83CF1E45A06A00E5698A /* Service */ = {
-			isa = PBXGroup;
-			children = (
-				12EB83D01E45A06A00E5698A /* Comment */,
-				12EB83D21E45A06A00E5698A /* Issue */,
-			);
-			name = Service;
-			path = Model;
-			sourceTree = "<group>";
-		};
-		12EB83D01E45A06A00E5698A /* Comment */ = {
-			isa = PBXGroup;
-			children = (
-				12EB83D11E45A06A00E5698A /* CommentService.swift */,
-			);
-			path = Comment;
-			sourceTree = "<group>";
-		};
-		12EB83D21E45A06A00E5698A /* Issue */ = {
-			isa = PBXGroup;
-			children = (
-				12EB83D31E45A06A00E5698A /* IssueService.swift */,
-				12EB83D41E45A06A00E5698A /* IssueLisetService.swift */,
-			);
-			path = Issue;
 			sourceTree = "<group>";
 		};
 		12EB83D61E45A06A00E5698A /* Common */ = {
@@ -492,27 +490,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				124537EB1E4EF8CA00EE4078 /* IssueCellViewModel.swift in Sources */,
-				12EB83FC1E45A06A00E5698A /* Issue.swift in Sources */,
+				1283F0701E6A5CC6009752C4 /* Comment.swift in Sources */,
 				12EB84031E45A06A00E5698A /* Collection+Extension.swift in Sources */,
+				1283F0761E6A5CC6009752C4 /* IssueDetailService.swift in Sources */,
+				1283F0721E6A5CC6009752C4 /* User.swift in Sources */,
+				1283F0741E6A5CC6009752C4 /* CommentService.swift in Sources */,
 				12EB84041E45A06A00E5698A /* Date+Extension.swift in Sources */,
-				12EB83F91E45A06A00E5698A /* API.swift in Sources */,
 				12EB84071E45A06A00E5698A /* HDCollectionView.swift in Sources */,
-				12EB84011E45A06A00E5698A /* Router.swift in Sources */,
-				12EB83FD1E45A06A00E5698A /* User.swift in Sources */,
 				3247F1B91E1F257800B5CD73 /* AppDelegate.swift in Sources */,
 				12EB84051E45A06A00E5698A /* UIColor+Extension.swift in Sources */,
 				124537ED1E4EF93400EE4078 /* Configurable.swift in Sources */,
 				12EB840E1E45A06A00E5698A /* IssueCommentCell.swift in Sources */,
-				12EB83FA1E45A06A00E5698A /* Config+Router.swift in Sources */,
 				12EB84101E45A06A00E5698A /* IssueDetailHeaderView.swift in Sources */,
 				124537EF1E4F04B300EE4078 /* LayoutAttributable.swift in Sources */,
-				12EB83FF1E45A06A00E5698A /* IssueService.swift in Sources */,
-				12EB84001E45A06A00E5698A /* IssueLisetService.swift in Sources */,
+				1283F0751E6A5CC6009752C4 /* IssueListService.swift in Sources */,
+				1283F0731E6A5CC6009752C4 /* Router.swift in Sources */,
+				1283F06F1E6A5CC6009752C4 /* Config+Router.swift in Sources */,
 				12EB840B1E45A06A00E5698A /* IssueListViewController.swift in Sources */,
-				12EB83FE1E45A06A00E5698A /* CommentService.swift in Sources */,
-				12EB83FB1E45A06A00E5698A /* Comment.swift in Sources */,
 				124537E91E4EF57500EE4078 /* IssueListViewModel.swift in Sources */,
 				12EB84081E45A06A00E5698A /* LayoutMarginLabel.swift in Sources */,
+				1283F06E1E6A5CC6009752C4 /* API.swift in Sources */,
 				12EB840A1E45A06A00E5698A /* IssueDetailViewController.swift in Sources */,
 				12EB84021E45A06A00E5698A /* DataRequest+Extension.swift in Sources */,
 				12EB84111E45A06A00E5698A /* SignInViewController.swift in Sources */,
@@ -520,6 +517,7 @@
 				12EB84131E45A06A00E5698A /* IssueListPresenter.swift in Sources */,
 				12EB84121E45A06A00E5698A /* IssueDetailPresenter.swift in Sources */,
 				12EB840C1E45A06A00E5698A /* IssueCell.swift in Sources */,
+				1283F0711E6A5CC6009752C4 /* Issue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

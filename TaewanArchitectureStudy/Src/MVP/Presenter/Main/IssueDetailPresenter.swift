@@ -17,11 +17,11 @@ protocol IssueDetailPresenterDelegate: class {
 
 class IssueDetailPresenter: NSObject {
     weak var delegate: IssueDetailPresenterDelegate?
-    let service: IssueService
+    let service: IssueDetailService
     
     init?(config: Router.IssueConfig?) {
         guard let issue = config else { return nil }
-        self.service = IssueService(config: issue)
+        self.service = IssueDetailService(config: issue)
         super.init()
     }
     

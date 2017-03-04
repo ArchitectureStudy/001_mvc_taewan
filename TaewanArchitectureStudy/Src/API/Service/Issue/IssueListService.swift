@@ -70,7 +70,7 @@ extension IssueListService {
     }
     
     @objc func updateIssueModel(_ notification: Notification) {
-        guard let model = notification.object as? IssueService,
+        guard let model = notification.object as? IssueDetailService,
             let userInfo = notification.userInfo else { return }
         //config 내용이 다르면 아무작업도 안합니당
         guard let issue = userInfo[Notification.Key.IssuesModel] as? Model.Issue,

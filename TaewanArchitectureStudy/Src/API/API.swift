@@ -18,16 +18,11 @@ public struct Model {
 }
 
 
-
-
-
 /// DTO 넣어주는것
 public protocol DataObjectUpdatable {
     associatedtype DataObjectItemType
-    
     func update(data: DataObjectItemType, withImage: Bool)
 }
-
 
 
 public protocol ModelLoadable: class {
