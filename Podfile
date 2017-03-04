@@ -5,13 +5,14 @@ target 'TaewanArchitectureStudy' do
 	use_frameworks!
     
     pod 'SwiftyJSON', '~> 3.1'
-#    pod 'RxSwift', '~> 3.0'
-#    pod 'RxCocoa', '~> 3.0'
+    pod 'RxSwift'
+    pod 'RxCocoa'
+    pod 'RxDataSources'
+    pod 'Then'
     
 	pod 'Alamofire', '~> 4.2'
     pod 'AlamofireImage', '~> 3.1'
 	pod 'NibDesignable', '~> 3.0'
-	pod 'Then'
     
 end
 
