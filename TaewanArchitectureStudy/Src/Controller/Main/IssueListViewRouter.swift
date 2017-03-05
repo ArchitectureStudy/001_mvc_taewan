@@ -46,10 +46,9 @@ class IssueListViewRouter: ViewRouter, IssueListViewRouterInput {
     // MARK: Communication
     func passDataToNextScene(segue: UIStoryboardSegue, sender: Any? = nil) {
         guard let identifier = Identifier(rawValue: segue.identifier ?? "") else {
-            assertionFailure("segue.identifier: \(segue.identifier)가 아주 거지 같은거 같은데!!")
+            assertionFailure("segue.identifier: \(segue.identifier)가 없나??")
             return
         }
-        
         switch identifier {
         case .show:
             passDataToIssueDetail(segue: segue, viewModel: sender as? IssueDetailViewModelType)
@@ -62,9 +61,6 @@ class IssueListViewRouter: ViewRouter, IssueListViewRouterInput {
             assertionFailure("잘못된 segue가 전달 되었구나.")
             return
         }
-        print(controller)
-        //        controller.title = "#\(issue.number)"
-        //        controller.config = config//Router.IssueConfig(repository: config, number: issue.number)
-        
+        _ = controller
     }
 }

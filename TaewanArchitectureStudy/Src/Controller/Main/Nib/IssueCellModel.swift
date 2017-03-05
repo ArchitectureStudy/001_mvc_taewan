@@ -11,8 +11,7 @@ import Foundation
 //흑 이거 남나 고민이네.. 시륭... 이런거 다른 아이디어나
 //쓸만한 이름 있음 좋겠다..
 protocol IssueModelType {
-    var id: Int { get }
-    var navigationTitle: String { get }
+    var number: Int { get }
 }
 
 protocol IssueCellModelType: ViewModelType, IssueModelType {
@@ -24,8 +23,7 @@ protocol IssueCellModelType: ViewModelType, IssueModelType {
 }
 
 struct IssueCellModel: IssueCellModelType {
-    let id: Int
-    let navigationTitle: String
+    let number: Int
     
     //output
     let title: String
@@ -37,6 +35,8 @@ struct IssueCellModel: IssueCellModelType {
     init?(_ data: Model.Issue?) {
         guard let data = data else { return nil }
         
+        self.number = data.number
+        
         let createdAt = data.createdAt?.string(dateFormat: "DD MMM yyyy") ?? "-"
         
         self.title = data.title
@@ -44,10 +44,5 @@ struct IssueCellModel: IssueCellModelType {
         self.isOpened = data.state == .open
         self.isCommentHidden = data.comments == 0
         self.comments = "\(data.comments)"
-        
-        
-        self.id = data.id
-        self.navigationTitle = "#\(data.number)"
     }
-
 }

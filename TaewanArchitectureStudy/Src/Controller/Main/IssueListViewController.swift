@@ -14,7 +14,7 @@ import RxDataSources
 class IssueListViewController: RxViewController, Configurable {
     
     @IBOutlet var collectionView: UICollectionView!
-    let refreshControl = UIRefreshControl()
+    private let refreshControl = UIRefreshControl()
     
     private var viewModel: IssueListViewModel!
     private var router: IssueListViewRouterInput!
@@ -35,6 +35,7 @@ class IssueListViewController: RxViewController, Configurable {
         router = IssueListViewRouter(self)
         collectionView.addSubview(refreshControl)
         collectionView.alwaysBounceVertical = true
+        
         if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.estimatedItemSize = CGSize(width: UIScreen.main.bounds.width, height: 56)
         }
@@ -74,52 +75,20 @@ class IssueListViewController: RxViewController, Configurable {
                 self.refreshControl.endRefreshing()
             }).disposed(by: disposeBag)
         
-        viewModel.presentIsseuDetailViewModel
+        viewModel.presentToIsseuDetail
             .subscribe(onNext: { [unowned self] (viewModel: IssueDetailViewModelType) in
                 self.router.navigateToIssueDetail(viewModel)
             }).disposed(by: disposeBag)
         
-        
         //first load
         viewModel.beginRefresh.onNext(Void())
-        
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        collectionView.reloadData()
-    }
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         assert(router != nil, "router이 nil이라니!! 신경좀 씁시다!!")
         router.passDataToNextScene(segue: segue, sender: sender)
-        
-        //        switch segue.destination {
-        //        case let controller as IssueDetailViewController:
-        //            guard let issue = sender as? Model.Issue else {
-        //                assertionFailure("issue data is null")
-        //                return
-        //            }
-        //            controller.title = "#\(issue.number)"
-        //            if let repository = viewModel?.config {
-        //                controller.config = Router.IssueConfig(repository: repository, number: issue.number)
-        //            }
-        //        default: break
-        //        }
-        
     }
     
-    //    @IBAction func didTapCreateIssue(_ sender: Any) {
-    //        guard let alertController = self.viewModel?.newIssueDidTap() else { return }
-    //        present(alertController, animated: true, completion: nil)
-    //    }
 }
 
-extension IssueListViewController: UICollectionViewDelegate {
-    //
-    //    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    //        self.performSegue(withIdentifier: "Show", sender: viewModel?.service.datas[safe: indexPath.row])
-    //    }
-    //
-}
+extension IssueListViewController: UICollectionViewDelegate { }

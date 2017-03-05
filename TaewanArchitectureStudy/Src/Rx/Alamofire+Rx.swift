@@ -25,6 +25,7 @@ extension Reactive where Base: DataRequest {
                     observer.onCompleted()
                 }
             }
+            
             return Disposables.create {
                 request.cancel()
             }
@@ -59,6 +60,7 @@ extension Reactive where Base: DataRequest {
                     observer.onCompleted()
                 }
             }
+            
             return Disposables.create {
                 request.cancel()
             }

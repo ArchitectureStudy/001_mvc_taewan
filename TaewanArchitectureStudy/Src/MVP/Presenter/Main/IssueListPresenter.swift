@@ -21,7 +21,7 @@ class IssueListPresenter: NSObject {
     
     init?(config: Router.RepositoryConfig?) {
         guard let repository = config else { return nil }
-        self.service = IssueListService(config: repository)
+        self.service = IssueListService(repository)
         super.init()
     }
 

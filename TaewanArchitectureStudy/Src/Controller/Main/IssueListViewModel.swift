@@ -21,32 +21,34 @@ protocol IssueListViewModelType: class, ViewModelType {
     var service: IssueListService { get }
     //네트워크 모델도 여기에 있어야하지 않을까?
     
-    // MARK: Input
+    // Input
     var beginRefresh: PublishSubject<Void> { get }
     var loadMore: PublishSubject<Void> { get }
     var itemDidSelect: PublishSubject<IndexPath> { get }
     
-    // MARK: Ouput
+    // Ouput
     var sections: Driver<[IssueListSection]> { get }
     var endRefresh: Observable<Void> { get }
-    var presentIsseuDetailViewModel: Observable<IssueDetailViewModelType> { get }
+    var presentToIsseuDetail: Observable<IssueDetailViewModelType> { get }
 }
 
 
 class IssueListViewModel: NSObject, IssueListViewModelType {
-    
+    // MARK: - Service
     let service: IssueListService
     
+    // MARK: - Input
     public let beginRefresh: PublishSubject<Void> = PublishSubject<Void>()
     public let loadMore: PublishSubject<Void> = PublishSubject<Void>()
     public let itemDidSelect: PublishSubject<IndexPath> = PublishSubject<IndexPath>()
     
+    // MARK: - Output
     public let sections: Driver<[IssueListSection]>
     public let endRefresh: Observable<Void>
-    public let presentIsseuDetailViewModel: Observable<IssueDetailViewModelType>
+    public let presentToIsseuDetail: Observable<IssueDetailViewModelType>
     
     init(config: Router.RepositoryConfig) {
-        service = IssueListService(config: config)
+        service = IssueListService(config)
         sections = service.dataSource
             .asObservable()
             .map { (value: [Model.Issue]) -> IssueListSection in
@@ -57,11 +59,16 @@ class IssueListViewModel: NSObject, IssueListViewModelType {
         
         endRefresh = sections.asObservable().map { _ in }
         
-        presentIsseuDetailViewModel = itemDidSelect
+        presentToIsseuDetail = itemDidSelect
             .withLatestFrom(sections) { (indexPath: IndexPath, sections: [IssueListSection]) -> IssueModelType in
                 sections[indexPath.section].items[indexPath.row] as IssueModelType
-            }.map { IssueDetailViewModel(config: config, issue: $0) }
-        
+            }.map { (issue: IssueModelType) -> Router.IssueConfig? in
+                Router.IssueConfig(repository: config, number: issue.number)
+            }.filter { $0 != nil }
+            .map { (config: Router.IssueConfig?) -> IssueDetailViewModelType in
+                IssueDetailViewModel(config: config!)
+            }.asObservable()
+        // } 이거 밀려서... asObservable 해줌...ㅋㅋ
         
         super.init()
         

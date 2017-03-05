@@ -17,34 +17,34 @@ protocol IssueDetailPresenterDelegate: class {
 @available(*, deprecated, message: "Presenter 제거")
 class IssueDetailPresenter: NSObject {
     weak var delegate: IssueDetailPresenterDelegate?
-    let service: IssueDetailService
+//    let service: IssueDetailService
     
     init?(config: Router.IssueConfig?) {
         guard let issue = config else { return nil }
-        self.service = IssueDetailService(config: issue)
+//        self.service = IssueDetailService(config: issue)
         super.init()
     }
     
     func refresh(withComment: Bool = true) {
-        service.refresh().response { [weak self] _ in
-            self?.delegate?.issueDidLoaded()
-            if withComment {
-                self?.refreshComments()
-            }
-        }
+//        service.refresh().response { [weak self] _ in
+//            self?.delegate?.issueDidLoaded()
+//            if withComment {
+//                self?.refreshComments()
+//            }
+//        }
     }
     
     func create(comment: String) {
-        service.commentService.create(body: comment).response { [weak self] _ in
-            self?.delegate?.createdComment()
-            self?.refresh(withComment: false)
-        }
+//        service.commentService.create(body: comment).response { [weak self] _ in
+//            self?.delegate?.createdComment()
+//            self?.refresh(withComment: false)
+//        }
     }
     
     private func refreshComments() {
-        service.commentService.refresh().response { [weak self] _ in
-            self?.delegate?.issueDidLoaded()
-        }
+//        service.commentService.refresh().response { [weak self] _ in
+//            self?.delegate?.issueDidLoaded()
+//        }
     }    
     
 }

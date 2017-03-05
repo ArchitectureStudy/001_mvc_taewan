@@ -13,44 +13,58 @@ import Alamofire
 import RxSwift
 
 
-/// Service에서도 Rx를 쓸까 말까 고민을 했는데... 
+/// Service에서도 Rx를 쓸까 말까 고민을 했는데...
 /// 음... 로드 방식 자체를 Rx를 사용했기때문에 그냥 여기서도 쓰기로!!
 public protocol IssueListServiceType {
-    // MARK: Property
+    // static
+    static var updateItem: PublishSubject<Model.Issue> { get }
+    static var refresh: PublishSubject<Router.RepositoryConfig> { get }
+    
+    // Property
     var page: Int { get }
     
-    // MARK: Input
+    // Input
     var refresh: PublishSubject<Void> { get }
     var loadMore: PublishSubject<Void> { get }
     
-    // MARK: Output
+    // Data
     var dataSource: Variable<[Model.Issue]> { get }
 }
 
 
 
 public class IssueListService: NSObject, IssueListServiceType {
-    public static let updateIssue: PublishSubject<Model.Issue> = PublishSubject<Model.Issue>()
+    // MARK: - Static
     
-    public let config: Router.RepositoryConfig
+    //음 내용교체할때는 문제가 안되는데.. 새로운거 추가하는 경우는?
+    public static let updateItem: PublishSubject<Model.Issue> = PublishSubject()
+    public static let refresh: PublishSubject<Router.RepositoryConfig> = PublishSubject()
     
+    
+    // MARK: - Property
     public private(set) var page: Int = 1
     
-    public let refresh: PublishSubject<Void> = PublishSubject<Void>()
-    public let loadMore: PublishSubject<Void> = PublishSubject<Void>()
+    // MARK: - Input
+    public let refresh: PublishSubject<Void> = PublishSubject()
+    public let loadMore: PublishSubject<Void> = PublishSubject()
     
+    // MARK: - Data
     public let dataSource: Variable<[Model.Issue]> = Variable([])
     
-    init(config: Router.RepositoryConfig) {
-        self.config = config
+    init(_ config: Router.RepositoryConfig) {
         super.init()
-        rxSetup()
-    }
-    
-    private func rxSetup() {
-        //일치 Model.Issue 업데이트
+
         _ = IssueListService
-            .updateIssue
+            .refresh
+            .takeUntil(rx.deallocated)//바꾸기 원하는거랑 같은 config라면!!
+            .filter { (targetConfig: Router.RepositoryConfig) -> Bool in
+                config == targetConfig
+            }.map { _ in }//같은 config 라도 전부 새로고침하면 좀 버벅거리지 않을까? 아 몰랑!
+            .bindTo(refresh)
+        
+        //일치하는 Model.Issue item 업데이트
+        _ = IssueListService
+            .updateItem
             .takeUntil(rx.deallocated)
             .subscribe(onNext: { [unowned self] issue in
                 guard let index = self.dataSource.value.index(of: issue) else { return }
@@ -58,28 +72,29 @@ public class IssueListService: NSObject, IssueListServiceType {
             })
         
         
-        let config = self.config
+        
         
         _ = refresh
-            .takeUntil(rx.deallocated)
             .do(onNext: { [unowned self] _ in
                 self.page = 1
             }).flatMap { _ -> Observable<[Model.Issue]> in
                 Router.issues(config: config, page: nil).dataRequest.rx.responseCollection()
-            }.subscribe(onNext: { [unowned self] (value: [Model.Issue]) in
+            }.takeUntil(rx.deallocated)
+            .subscribe(onNext: { [unowned self] (value: [Model.Issue]) in
                 self.dataSource.value = value
             })
         
         _ = loadMore
-            .takeUntil(rx.deallocated)
             .map { [unowned self] in
                 self.page += 1
                 return self.page
             }.flatMap { page -> Observable<[Model.Issue]> in
                 Router.issues(config: config, page: page).dataRequest.rx.responseCollection()
-            }.subscribe(onNext: { [unowned self] (value: [Model.Issue]) in
+            }.takeUntil(rx.deallocated)
+            .subscribe(onNext: { [unowned self] (value: [Model.Issue]) in
                 self.dataSource.value += value
             })
+        
     }
     
 }

@@ -79,6 +79,7 @@ extension Router {
             configuration.urlCache = URLCache(memoryCapacity: 0, diskCapacity: 0, diskPath: nil)
             _manager = Alamofire.SessionManager(configuration: configuration)
         }
+        
         return _manager!
     }
 }

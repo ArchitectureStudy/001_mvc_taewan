@@ -10,6 +10,7 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
+let utilityQueue = DispatchQueue.global(qos: .utility)
 
 enum BackendError: Error {
     case network(error: Error)

@@ -12,6 +12,8 @@ import SwiftyJSON
 
 extension Model {
     public struct Issue: ResponseCollectionSerializable, ResponseObjectSerializable {
+        static var empty: Issue { return Issue(json: JSON(dictionaryLiteral: [])) }
+        
         let id: Int
         let number: Int
         let title: String
@@ -24,6 +26,7 @@ extension Model {
         let closedAt: Date?
         
         public init(json: JSON) {
+            
             id = json["id"].intValue
             number = json["number"].intValue
             title = json["title"].stringValue

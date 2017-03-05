@@ -26,7 +26,7 @@ class IssueDetailViewController: UIViewController {
     fileprivate var estimateCell: IssueCommentCell = IssueCommentCell()
     fileprivate var estimatedSizes: [IndexPath: CGSize] = [:]
     
-    let refreshControl = UIRefreshControl()
+    private let refreshControl = UIRefreshControl()
     
 
     @IBAction func didTapCreateComment(_ sender: Any) {
