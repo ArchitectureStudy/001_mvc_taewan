@@ -33,16 +33,12 @@ struct IssueDetailHeaderViewModel: IssueDetailHeaderViewModelType {
     
     
     init?(_ data: Model.Issue?) {
-        guard let data = data, data?.id != 0 else { return nil }
-        
+        guard let data = data, data.id != 0 else { return nil }
         
         let createdAt = data.createdAt?.string(dateFormat: "DD MMM yyyy") ?? "-"
-        
         self.isOpened = data.state == .open
-        
         self.title = data.title
         self.info = "\(data.user.login) \(data.state.display) this issue on \(createdAt) · \(data.comments) comments"
-        
         self.avatarURL = data.user.avatarURL
         self.comment = data.body
         self.commentInfo = "\(data.user.login) commented on \(createdAt)"

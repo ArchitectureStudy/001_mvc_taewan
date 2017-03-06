@@ -17,10 +17,6 @@ typealias IssueListSection = SectionModel<Void, IssueCellModelType>
 
 protocol IssueListViewModelType: class, ViewModelType {
     
-    /// service는 viewModel에서만 관리하면 좋겠는데.. private 로는 못하낭 ㅠㅜ
-    var service: IssueListService { get }
-    //네트워크 모델도 여기에 있어야하지 않을까?
-    
     // Input
     var beginRefresh: PublishSubject<Void> { get }
     var loadMore: PublishSubject<Void> { get }

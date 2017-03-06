@@ -14,10 +14,6 @@ import RxDataSources
 typealias CommentListSection = SectionModel<Void, IssueCommentCellModelType>
 
 protocol IssueDetailViewModelType: class, ViewModelType {
-    // Service
-    var service: IssueService { get }
-    var commentService: CommentListService { get }
-    
     
     // Input
     var beginRefresh: PublishSubject<Void> { get }
@@ -29,8 +25,6 @@ protocol IssueDetailViewModelType: class, ViewModelType {
     var endRefresh: Observable<Void> { get }
     
 }
-
-
 
 
 class IssueDetailViewModel: NSObject, IssueDetailViewModelType {

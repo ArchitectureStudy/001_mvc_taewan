@@ -26,12 +26,36 @@ class IssueDetailViewController: UIViewController {
     fileprivate var estimateCell: IssueCommentCell = IssueCommentCell()
     fileprivate var estimatedSizes: [IndexPath: CGSize] = [:]
     
-    private let refreshControl = UIRefreshControl()
+    let refreshControl = UIRefreshControl()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setup()
+        eventSetup()
+        refresh(sender: self)
+    }
 
+    func setup() {
+        collectionView.headerView = self.headerView
+        collectionView.alwaysBounceVertical = true
+        collectionView.alpha = 0
+        
+        collectionView.addSubview(refreshControl)
+        refreshControl.bounds.origin.y = headerView.bounds.height
+    }
+    
+    func eventSetup() {
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(onChangedKeyboard), name: .UIKeyboardWillChangeFrame, object: nil)
+    }
+    
+    func refresh(sender: Any) {
+        //        presenter?.refresh()
+    }
     @IBAction func didTapCreateComment(_ sender: Any) {
         guard let body = commentTextView.text, !body.isEmpty else { return }
-//        presenter?.create(comment: body)
+        //        presenter?.create(comment: body)
         commentButton.isEnabled = false
         commentTextView.text = nil
     }
@@ -72,28 +96,6 @@ extension IssueDetailViewController: IssueDetailPresenterDelegate {
 }
 
 
-// MARK: - Setup
-extension IssueDetailViewController  {
-    
-    func setup() {
-        collectionView.headerView = self.headerView
-        collectionView.alwaysBounceVertical = true
-        collectionView.alpha = 0
-        
-        collectionView.addSubview(refreshControl)
-        refreshControl.bounds.origin.y = headerView.bounds.height
-    }
-    
-    func eventSetup() {
-        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(onChangedKeyboard), name: .UIKeyboardWillChangeFrame, object: nil)
-    }
-    
-    func refresh(sender: Any) {
-//        presenter?.refresh()
-    }
-}
 
 
 extension IssueDetailViewController: UICollectionViewDataSource {
@@ -159,14 +161,3 @@ extension IssueDetailViewController {
     
 }
 
-
-
-// MARK: - override
-extension IssueDetailViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setup()
-        eventSetup()
-        refresh(sender: self)
-    }
-}
